@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفقه الشافعي - الصف الثالث الإعدادي</title>
+<style>
+/* ===== الخطوط والأساسيات ===== */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Reem+Kufi:wght@400;600;700&display=swap');
+
+:root{
+  --bg-primary:#f5f1e8;
+  --bg-secondary:#ede4d3;
+  --bg-card:#ffffff;
+  --text-primary:#1a3a2e;
+  --text-secondary:#3d5a4c;
+  --text-muted:#6b8478;
+  --accent:#0f7a5a;
+  --accent-light:#1a9d75;
+  --accent-dark:#0a5640;
+  --gold:#c9a961;
+  --gold-dark:#a68a3f;
+  --danger:#c54545;
+  --success:#2d8659;
+  --warning:#d4933a;
+  --border:#d4c5a0;
+  --shadow:0 4px 20px rgba(15,122,90,0.08);
+  --shadow-hover:0 12px 40px rgba(15,122,90,0.18);
+  --radius:16px;
+  --transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"]{
+  --bg-primary:#0f1714;
+  --bg-secondary:#1a2520;
+  --bg-card:#1e2b25;
+  --text-primary:#e8e0c8;
+  --text-secondary:#b8c5bc;
+  --text-muted:#7a8a82;
+  --accent:#3cb28a;
+  --accent-light:#5fcfa5;
+  --accent-dark:#2a8a68;
+  --gold:#d4b56e;
+  --gold-dark:#b8945a;
+  --border:#2d3d35;
+  --shadow:0 4px 20px rgba(0,0,0,0.4);
+  --shadow-hover:0 12px 40px rgba(0,0,0,0.6);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  min-height:100vh;
+  transition:var(--transition);
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* خلفية زخرفية إسلامية */
+body::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(15,122,90,0.04) 0%,transparent 40%),
+    radial-gradient(circle at 90% 80%,rgba(201,169,97,0.05) 0%,transparent 40%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z' fill='%230f7a5a' fill-opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== زر الوضع الليلي ===== */
+.theme-toggle{
+  position:fixed;
+  top:20px;left:20px;
+  z-index:1000;
+  width:50px;height:50px;
+  border-radius:50%;
+  background:var(--bg-card);
+  border:2px solid var(--accent);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  box-shadow:var(--shadow);
+  transition:var(--transition);
+}
+.theme-toggle:hover{transform:scale(1.1) rotate(15deg);}
+
+/* ===== شاشة البداية ===== */
+.welcome-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  position:relative;
+  z-index:1;
+}
+
+.welcome-card{
+  background:var(--bg-card);
+  border-radius:24px;
+  padding:50px 40px;
+  max-width:600px;
+  width:100%;
+  text-align:center;
+  box-shadow:var(--shadow-hover);
+  border:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+  animation:fadeUp 0.8s ease;
+}
+
+.welcome-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:6px;
+  background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
+}
+
+.welcome-logo{
+  width:90px;height:90px;
+  margin:0 auto 25px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;
+  color:white;
+  box-shadow:0 8px 25px rgba(15,122,90,0.3);
+  position:relative;
+}
+
+.welcome-logo::after{
+  content:'';
+  position:absolute;
+  inset:-8px;
+  border:2px dashed var(--gold);
+  border-radius:50%;
+  animation:spin 20s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.welcome-card h1{
+  font-family:'Reem Kufi',sans-serif;
+  font-size:26px;
+  color:var(--accent-dark);
+  margin-bottom:12px;
+  line-height:1.4;
+  font-weight:700;
+}
+
+.welcome-card .subtitle{
+  color:var(--text-secondary);
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.welcome-card .author{
+  color:var(--gold-dark);
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:35px;
+  padding:8px 20px;
+  background:rgba(201,169,97,0.1);
+  border-radius:20px;
+  display:inline-block;
+}
+
+.input-group{
+  margin-bottom:20px;
+  text-align:right;
+}
+
+.input-group label{
+  display:block;
+  margin-bottom:8px;
+  color:var(--text-secondary);
+  font-weight:600;
+  font-size:14px;
+}
+
+.input-group input{
+  width:100%;
+  padding:14px 18px;
+  border:2px solid var(--border);
+  border-radius:12px;
+  font-family:'Cairo',sans-serif;
+  font-size:16px;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  transition:var(--transition);
+  text-align:right;
+}
+
+.input-group input:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 4px rgba(15,122,90,0.1);
+}
+
+.btn-primary{
+  width:100%;
+  padding:16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-family:'Cairo',sans-serif;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  transition:var(--transition);
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(15,122,90,0.35);
+}
+
+.btn-primary:active{transform:translateY(0);}
+
+.btn-primary:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* ===== الواجهة الرئيسية ===== */
+.main-app{
+  display:none;
+  min-height:100vh;
+  padding:20px;
+  position:relative;
+  z-index:1;
+}
+
+.main-app.active{display:block;}
+
+.header{
+  background:var(--bg-card);
+  border-radius:20px;
+  padding:20px 25px;
+  margin-bottom:25px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.header-info h2{
+  font-family:'Reem Kufi',sans-serif;
+  color:var(--accent-dark);
+  font-size:22px;
+  margin-bottom:4px;
+}
+
+.header-info p{
+  color:var(--text-muted);
+  font-size:14px;
+}
+
+.header-stats{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.stat-mini{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:white;
+  padding:10px 18px;
+  border-radius:12px;
+  text-align:center;
+  min-width:90px;
+}
+
+.stat-mini .num{
+  font-size:22px;
+  font-weight:900;
+  display:block;
+}
+
+.stat-mini .lbl{
+  font-size:11px;
+  opacity:0.9;
+}
+
+/* ===== بطاقات الدروس ===== */
+.section-title{
+  font-family:'Reem Kufi',sans-serif;
+  color:var(--accent-dark);
+  font-size:24px;
+  margin:25px 0 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.section-title::before{
+  content:'';
+  width:6px;
+  height:28px;
+  background:linear-gradient(180deg,var(--accent),var(--gold));
+  border-radius:4px;
+}
+
+.lessons-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.lesson-card{
+  background:var(--bg-card);
+  border-radius:var(--radius);
+  padding:25px;
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:var(--transition);
+  position:relative;
+  overflow:hidden;
+  animation:fadeUp 0.5s ease backwards;
+}
+
+.lesson-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--accent);
+}
+
+.lesson-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform 0.4s ease;
+}
+
+.lesson-card:hover::before{transform:scaleX(1);}
+
+.lesson-icon{
+  width:60px;height:60px;
+  background:linear-gradient(135deg,rgba(15,122,90,0.1),rgba(201,169,97,0.1));
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+  margin-bottom:15px;
+  border:1px solid var(--border);
+}
+
+.lesson-card h3{
+  font-family:'Reem Kufi',sans-serif;
+  color:var(--text-primary);
+  font-size:18px;
+  margin-bottom:8px;
+  line-height:1.3;
+}
+
+.lesson-card p{
+  color:var(--text-muted);
+  font-size:13px;
+  margin-bottom:15px;
+  line-height:1.5;
+}
+
+.lesson-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+
+.lesson-questions{
+  color:var(--accent);
+  font-size:13px;
+  font-weight:600;
+}
+
+.lesson-arrow{
+  color:var(--gold);
+  font-size:18px;
+}
+
+/* ===== صفحة الدرس ===== */
+.lesson-page{
+  display:none;
+  animation:fadeIn 0.4s ease;
+}
+
+.lesson-page.active{display:block;}
+
+.back-btn{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  color:var(--accent);
+  padding:10px 20px;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:20px;
+  transition:var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.back-btn:hover{
+  background:var(--accent);
+  color:white;
+}
+
+.lesson-header{
+  background:linear-gradient(135deg,var(--accent-dark),var(--accent));
+  color:white;
+  padding:35px;
+  border-radius:20px;
+  margin-bottom:25px;
+  position:relative;
+  overflow:hidden;
+}
+
+.lesson-header::after{
+  content:'';
+  position:absolute;
+  top:-50%;right:-20%;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(201,169,97,0.2),transparent 70%);
+  border-radius:50%;
+}
+
+.lesson-header h2{
+  font-family:'Reem Kufi',sans-serif;
+  font-size:28px;
+  margin-bottom:10px;
+  position:relative;
+}
+
+.lesson-header p{
+  opacity:0.9;
+  font-size:15px;
+  position:relative;
+}
+
+.content-card{
+  background:var(--bg-card);
+  border-radius:var(--radius);
+  padding:25px;
+  margin-bottom:20px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.content-card h3{
+  font-family:'Reem Kufi',sans-serif;
+  color:var(--accent-dark);
+  font-size:19px;
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.content-card h3::before{
+  content:'❖';
+  color:var(--gold);
+}
+
+.content-card p,.content-card li{
+  color:var(--text-secondary);
+  line-height:1.9;
+  font-size:15px;
+}
+
+.content-card ul,.content-card ol{
+  padding-right:25px;
+  margin-top:8px;
+}
+
+.content-card li{margin-bottom:6px;}
+
+.content-card .highlight{
+  background:rgba(201,169,97,0.15);
+  padding:2px 8px;
+  border-radius:6px;
+  color:var(--gold-dark);
+  font-weight:600;
+}
+
+.exams-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-top:15px;
+}
+
+.exam-btn{
+  padding:20px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  transition:var(--transition);
+  text-align:right;
+  position:relative;
+  overflow:hidden;
+}
+
+.exam-btn .exam-name{
+  font-size:17px;
+  display:block;
+  margin-bottom:5px;
+}
+
+.exam-btn .exam-count{
+  font-size:12px;
+  opacity:0.85;
+  display:block;
+}
+
+.exam-easy{
+  background:linear-gradient(135deg,#2d8659,#1a5c3d);
+  color:white;
+}
+
+.exam-medium{
+  background:linear-gradient(135deg,#d4933a,#a66b1f);
+  color:white;
+}
+
+.exam-hard{
+  background:linear-gradient(135deg,#c54545,#8a2828);
+  color:white;
+}
+
+.exam-btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.review-btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:white;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-family:'Cairo',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:var(--transition);
+  margin-top:10px;
+}
+
+.review-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(201,169,97,0.4);
+}
+
+/* ===== صفحة الامتحان ===== */
+.exam-page{
+  display:none;
+  min-height:100vh;
+}
+
+.exam-page.active{display:block;}
+
+.exam-topbar{
+  background:var(--bg-card);
+  border-radius:16px;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  position:sticky;
+  top:10px;
+  z-index:50;
+}
+
+.exam-info{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.exam-info .badge{
+  background:var(--accent);
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.timer{
+  background:linear-gradient(135deg,#c54545,#8a2828);
+  color:white;
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight:700;
+  font-family:'Cairo',monospace;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.progress-bar{
+  width:100%;
+  height:8px;
+  background:var(--bg-secondary);
+  border-radius:4px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  border-radius:4px;
+  transition:width 0.4s ease;
+}
+
+.question-card{
+  background:var(--bg-card);
+  border-radius:var(--radius);
+  padding:30px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  margin-bottom:20px;
+  animation:fadeIn 0.4s ease;
+}
+
+.q-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+  padding-bottom:15px;
+  border-bottom:2px dashed var(--border);
+}
+
+.q-number{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:white;
+  padding:6px 16px;
+  border-radius:20px;
+  font-weight:700;
+  font-size:14px;
+}
+
+.q-type{
+  background:rgba(201,169,97,0.15);
+  color:var(--gold-dark);
+  padding:4px 12px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.q-text{
+  font-size:18px;
+  line-height:1.7;
+  color:var(--text-primary);
+  margin-bottom:22px;
+  font-weight:600;
+}
+
+.options-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.option-item{
+  background:var(--bg-primary);
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:15px 18px;
+  cursor:pointer;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:15px;
+  color:var(--text-primary);
+}
+
+.option-item:hover{
+  border-color:var(--accent);
+  background:rgba(15,122,90,0.05);
+  transform:translateX(-5px);
+}
+
+.option-item.selected{
+  background:linear-gradient(135deg,rgba(15,122,90,0.1),rgba(201,169,97,0.1));
+  border-color:var(--accent);
+  font-weight:600;
+}
+
+.option-letter{
+  width:32px;height:32px;
+  background:var(--bg-card);
+  border:2px solid var(--border);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;
+  color:var(--accent);
+  flex-shrink:0;
+  transition:var(--transition);
+}
+
+.option-item.selected .option-letter{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.tf-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.tf-btn{
+  padding:25px;
+  border-radius:14px;
+  border:2px solid var(--border);
+  background:var(--bg-primary);
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  transition:var(--transition);
+}
+
+.tf-btn.true-btn:hover{
+  background:rgba(45,134,89,0.1);
+  border-color:var(--success);
+  color:var(--success);
+}
+
+.tf-btn.false-btn:hover{
+  background:rgba(197,69,69,0.1);
+  border-color:var(--danger);
+  color:var(--danger);
+}
+
+.tf-btn.selected.true-btn{
+  background:var(--success);
+  color:white;
+  border-color:var(--success);
+}
+
+.tf-btn.selected.false-btn{
+  background:var(--danger);
+  color:white;
+  border-color:var(--danger);
+}
+
+.input-answer{
+  width:100%;
+  padding:15px;
+  border:2px solid var(--border);
+  border-radius:12px;
+  font-family:'Cairo',sans-serif;
+  font-size:16px;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  text-align:right;
+}
+
+.input-answer:focus{
+  outline:none;
+  border-color:var(--accent);
+}
+
+.exam-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-top:25px;
+}
+
+.nav-btn{
+  padding:13px 28px;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nav-btn.prev{
+  background:var(--bg-card);
+  color:var(--accent);
+  border:2px solid var(--accent);
+}
+
+.nav-btn.prev:hover{
+  background:var(--accent);
+  color:white;
+}
+
+.nav-btn.next{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:white;
+}
+
+.nav-btn.next:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(15,122,90,0.3);
+}
+
+.nav-btn.finish{
+  background:linear-gradient(135deg,#c54545,#8a2828);
+  color:white;
+}
+
+.nav-btn:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
+}
+
+/* ===== صفحة النتائج ===== */
+.results-page{
+  display:none;
+  animation:fadeIn 0.5s ease;
+}
+
+.results-page.active{display:block;}
+
+.results-card{
+  background:var(--bg-card);
+  border-radius:24px;
+  padding:40px 30px;
+  max-width:800px;
+  margin:0 auto;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-hover);
+  text-align:center;
+}
+
+.result-emoji{
+  font-size:70px;
+  margin-bottom:15px;
+  animation:bounce 0.8s ease;
+}
+
+@keyframes bounce{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+}
+
+.result-grade{
+  font-family:'Reem Kufi',sans-serif;
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.result-message{
+  color:var(--text-secondary);
+  font-size:16px;
+  margin-bottom:25px;
+  padding:12px 20px;
+  background:rgba(201,169,97,0.1);
+  border-radius:12px;
+  border-right:4px solid var(--gold);
+}
+
+.result-score{
+  font-size:54px;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+}
+
+.result-percentage{
+  color:var(--text-muted);
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.result-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.result-stat{
+  padding:18px;
+  border-radius:14px;
+  background:var(--bg-primary);
+  border:1px solid var(--border);
+}
+
+.result-stat .stat-val{
+  font-size:28px;
+  font-weight:900;
+  display:block;
+  margin-bottom:4px;
+}
+
+.result-stat .stat-lbl{
+  color:var(--text-muted);
+  font-size:13px;
+}
+
+.stat-correct .stat-val{color:var(--success);}
+.stat-wrong .stat-val{color:var(--danger);}
+.stat-total .stat-val{color:var(--accent);}
+.stat-time .stat-val{color:var(--gold-dark);}
+
+.analysis-section{
+  background:var(--bg-primary);
+  border-radius:14px;
+  padding:20px;
+  margin:20px 0;
+  text-align:right;
+}
+
+.analysis-section h4{
+  color:var(--accent-dark);
+  font-family:'Reem Kufi',sans-serif;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:17px;
+}
+
+.strength-list li{
+  color:var(--success);
+  margin-bottom:6px;
+}
+
+.weakness-list li{
+  color:var(--danger);
+  margin-bottom:6px;
+}
+
+.results-actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+/* ===== لوحة الإنجازات ===== */
+.achievements-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.achievement-card{
+  background:linear-gradient(135deg,var(--bg-card),var(--bg-secondary));
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  border:1px solid var(--border);
+  transition:var(--transition);
+}
+
+.achievement-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-hover);
+}
+
+.ach-icon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.ach-value{
+  font-size:30px;
+  font-weight:900;
+  color:var(--accent);
+  margin-bottom:5px;
+}
+
+.ach-label{
+  color:var(--text-muted);
+  font-size:13px;
+}
+
+/* ===== المراجعة السريعة ===== */
+.review-modal{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.7);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  animation:fadeIn 0.3s;
+}
+
+.review-modal.active{display:flex;}
+
+.review-content{
+  background:var(--bg-card);
+  border-radius:20px;
+  padding:30px;
+  max-width:700px;
+  width:100%;
+  max-height:85vh;
+  overflow-y:auto;
+  border:1px solid var(--border);
+}
+
+.review-content h3{
+  color:var(--accent-dark);
+  font-family:'Reem Kufi',sans-serif;
+  font-size:22px;
+  margin-bottom:15px;
+  padding-bottom:15px;
+  border-bottom:2px solid var(--border);
+}
+
+.review-item{
+  background:var(--bg-primary);
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:12px;
+  border-right:4px solid var(--accent);
+}
+
+.review-item .q{font-weight:700;color:var(--text-primary);margin-bottom:6px;}
+.review-item .a{color:var(--success);font-size:14px;}
+
+.close-review{
+  background:var(--danger);
+  color:white;
+  border:none;
+  padding:10px 25px;
+  border-radius:10px;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-weight:600;
+  margin-top:15px;
+  width:100%;
+}
+
+/* ===== تنبيهات ===== */
+.toast{
+  position:fixed;
+  bottom:30px;
+  right:50%;
+  transform:translateX(50%) translateY(100px);
+  background:var(--accent-dark);
+  color:white;
+  padding:14px 25px;
+  border-radius:12px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
+  z-index:3000;
+  transition:transform 0.4s ease;
+  font-weight:600;
+}
+
+.toast.show{transform:translateX(50%) translateY(0);}
+
+/* ===== الحركات ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* ===== استجابة الموبايل ===== */
+@media (max-width:768px){
+  .welcome-card{padding:35px 25px;}
+  .welcome-card h1{font-size:21px;}
+  .header{flex-direction:column;text-align:center;}
+  .header-stats{justify-content:center;}
+  .lesson-header{padding:25px 20px;}
+  .lesson-header h2{font-size:22px;}
+  .question-card{padding:20px;}
+  .q-text{font-size:16px;}
+  .exam-topbar{position:relative;}
+  .results-card{padding:30px 20px;}
+  .result-score{font-size:42px;}
+  .tf-options{grid-template-columns:1fr;}
+}
+
+/* شريط التمرير */
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--bg-secondary);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:5px;}
+::-webkit-scrollbar-thumb:hover{background:var(--accent-dark);}
+</style>
+</head>
+<body>
+
+<!-- زر الوضع الليلي -->
+<button class="theme-toggle" onclick="toggleTheme()" title="الوضع الليلي/النهاري">🌙</button>
+
+<!-- ===== شاشة البداية ===== -->
+<div class="welcome-screen" id="welcomeScreen">
+  <div class="welcome-card">
+    <div class="welcome-logo">📖</div>
+    <h1>مرحباً بك في البرنامج التعليمي الخاص بالفقه الشافعي للصف الثالث الإعدادي</h1>
+    <p class="subtitle">برنامج تعليمي شامل لمراجعة وتقييم مستواك في مادة الفقه</p>
+    <div class="author">إعداد وتصميم: عبدالله وائل</div>
+    <div class="input-group">
+      <label for="studentName">الرجاء إدخال اسمك للمتابعة</label>
+      <input type="text" id="studentName" placeholder="اكتب اسمك هنا..." autocomplete="off">
+    </div>
+    <button class="btn-primary" id="enterBtn" onclick="enterApp()" disabled>تأكيد الدخول</button>
+  </div>
+</div>
+
+<!-- ===== الواجهة الرئيسية ===== -->
+<div class="main-app" id="mainApp">
+  <div class="header">
+    <div class="header-info">
+      <h2 id="welcomeName">أهلاً بك</h2>
+      <p>الفقه الشافعي - الصف الثالث الإعدادي</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-mini">
+        <span class="num" id="statExams">0</span>
+        <span class="lbl">امتحانات</span>
+      </div>
+      <div class="stat-mini">
+        <span class="num" id="statBest">0%</span>
+        <span class="lbl">أفضل درجة</span>
+      </div>
+      <div class="stat-mini">
+        <span class="num" id="statAvg">0%</span>
+        <span class="lbl">المتوسط</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-title">لوحة الإنجازات</h3>
+  <div class="achievements-grid" id="achievementsGrid"></div>
+
+  <h3 class="section-title">الدروس الدراسية</h3>
+  <div class="lessons-grid" id="lessonsGrid"></div>
+</div>
+
+<!-- ===== صفحة الدرس ===== -->
+<div class="lesson-page" id="lessonPage">
+  <button class="back-btn" onclick="showMainApp()">← العودة للدروس</button>
+  <div class="lesson-header" id="lessonHeader"></div>
+  
+  <div class="content-card">
+    <h3>ملخص الدرس</h3>
+    <div id="lessonSummary"></div>
+  </div>
+
+  <div class="content-card">
+    <h3>أهم النقاط</h3>
+    <div id="lessonPoints"></div>
+  </div>
+
+  <div class="content-card">
+    <h3>المراجعة السريعة والامتحانات</h3>
+    <button class="review-btn" onclick="openReview()">📝 مراجعة سريعة للأسئلة والأجوبة</button>
+    <div class="exams-grid">
+      <button class="exam-btn exam-easy" onclick="startExam('easy')">
+        <span class="exam-name">امتحان سهل</span>
+        <span class="exam-count">15 سؤال</span>
+      </button>
+      <button class="exam-btn exam-medium" onclick="startExam('medium')">
+        <span class="exam-name">امتحان متوسط</span>
+        <span class="exam-count">40 سؤال</span>
+      </button>
+      <button class="exam-btn exam-hard" onclick="startExam('hard')">
+        <span class="exam-name">امتحان مكثف</span>
+        <span class="exam-count">100 سؤال</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== صفحة الامتحان ===== -->
+<div class="exam-page" id="examPage">
+  <div class="exam-topbar">
+    <div class="exam-info">
+      <span class="badge" id="examLessonName"></span>
+      <span class="badge" id="examLevel" style="background:var(--gold);"></span>
+      <span class="badge" id="qCounter" style="background:var(--text-secondary);"></span>
+    </div>
+    <div class="timer" id="examTimer">⏱ 00:00</div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:0%;"></div>
+  </div>
+  <div id="questionContainer"></div>
+  <div class="exam-nav">
+    <button class="nav-btn prev" id="prevBtn" onclick="prevQuestion()">→ السابق</button>
+    <button class="nav-btn finish" onclick="finishExam()">إنهاء الامتحان</button>
+    <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()">التالي ←</button>
+  </div>
+</div>
+
+<!-- ===== صفحة النتائج ===== -->
+<div class="results-page" id="resultsPage">
+  <div class="results-card" id="resultsCard"></div>
+</div>
+
+<!-- ===== نافذة المراجعة ===== -->
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h3>📝 المراجعة السريعة</h3>
+    <div id="reviewContent"></div>
+    <button class="close-review" onclick="closeReview()">إغلاق</button>
+  </div>
+</div>
+
+<!-- ===== تنبيه ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   بنك الأسئلة الشامل - الفقه الشافعي - الصف الثالث الإعدادي
+   تم استخراجها من محتوى الكتاب المرفق
+   ============================================================ */
+
+const LESSONS = [
+  {
+    id:1, title:"الظهار", icon:"⚖️",
+    summary:"الظهار لغةً مأخوذ من الظهر، وشرعاً تشبيه الزوج زوجته غير البائن بأنثى محرمة عليه. وهو حرام ومن الكبائر. أركانه أربعة: المظاهر (الزوج)، والمظاهر منها (الزوجة غير البائن)، والمشبه به (أنثى محرمة)، والصيغة. كفارته: عتق رقبة مسلمة، فإن لم يجد فصيام شهرين هلاليين، فإن لم يستطع فإطعام ستين مسكيناً.",
+    points:[
+      "الظهار حرام ومن الكبائر",
+      "أركانه أربعة: المظاهر، المظاهر منها، المشبه به، الصيغة",
+      "الكفارة مرتبة: عتق رقبة → صيام شهرين → إطعام ستين مسكيناً",
+      "لا يحل للمظاهر وطء زوجته حتى يكفر كل الكفارة",
+      "إذا أتبع الظهار بالطلاق فلا كفارة عليه"
+    ],
+    questions:[
+      {t:"mcq",q:"الظهار لغةً مأخوذ من:",o:["الظهر","الظهور","الظاهرة","الظلم"],a:0},
+      {t:"mcq",q:"الظهار شرعاً هو تشبيه الزوج زوجته:",o:["بأنثى محرمة عليه","بأخرى من زوجاته","بأمه فقط","بأخته فقط"],a:0},
+      {t:"tf",q:"الظهار من الكبائر.",a:true},
+      {t:"tf",q:"الظهار حلال إذا كان بقصد الطلاق.",a:false},
+      {t:"mcq",q:"عدد أركان الظهار:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"mcq",q:"المظاهر هو:",o:["الزوج","الزوجة","الولي","القاضي"],a:0},
+      {t:"mcq",q:"المظاهر منها هي:",o:["الزوجة البائن","الزوجة غير البائن","المطلقة","الأخت"],a:1},
+      {t:"mcq",q:"شرط المشبه به في الظهار:",o:["أن يكون ذكراً","أن تكون أنثى محرمة لم تكن حلالاً له","أن تكون أجنبية","أن تكون كتابية"],a:1},
+      {t:"mcq",q:"الكفارة الأولى في الظهار هي:",o:["صيام شهرين","إطعام ستين مسكيناً","عتق رقبة مسلمة","صدقة"],a:2},
+      {t:"mcq",q:"إذا لم يجد المظاهر رقبة فعليه:",o:["إطعام ستين مسكيناً","صيام شهرين هلاليين","صدقة","لا شيء"],a:1},
+      {t:"mcq",q:"إذا لم يستطع صيام شهرين فعليه:",o:["عتق رقبة","صيام شهر","إطعام ستين مسكيناً","لا شيء"],a:2},
+      {t:"tf",q:"يجوز للمظاهر وطء زوجته قبل إتمام الكفارة.",a:false},
+      {t:"tf",q:"يكفي في كفارة الظهار فعل بعض خصال الكفارة.",a:false},
+      {t:"tf",q:"إذا أتبع الظهار بالطلاق فلا كفارة عليه.",a:true},
+      {t:"mcq",q:"صوم شهرين في كفارة الظهار يكون:",o:["بنية الكفارة من الليل","بنية من النهار","بلا نية","بنية التطوع"],a:0},
+      {t:"mcq",q:"إطعام ستين مسكيناً يكون كل مسكين بـ:",o:["مد من غالب قوت البلد","نصف مد","صاع","مدّين"],a:0},
+      {t:"tf",q:"الظهار صورته الأصلية أن يقول: أنت عليَّ كظهر أمي.",a:true},
+      {t:"mcq",q:"إذا عجز المظاهر عن خصال الكفارة الثلاث:",o:["سقطت عنه","بقيت في ذمته","يصلي بدلاً منها","يصوم يوماً"],a:1},
+      {t:"mcq",q:"القدر الواجب إخراجه إذا قدر على بعض الكفارة:",o:["ما قدر عليه ويبقى الباقي في ذمته","لا شيء","الكفارة كاملة","نصف الكفارة"],a:0},
+      {t:"tf",q:"لا يشترط نية التتابع في صوم كفارة الظهار على الأصح.",a:true},
+      {t:"fill",q:"الظهار لغةً مأخوذ من ............",a:"الظهر"},
+      {t:"fill",q:"أركان الظهار ............ أركان.",a:"أربعة"},
+      {t:"fill",q:"الكفارة الأولى في الظهار هي عتق ............",a:"رقبة"},
+      {t:"def",q:"عرّف الظهار شرعاً.",a:"تشبيه الزوج زوجته غير البائن بأنثى محرمة عليه أو جزء منها لم تكن حلاًّ له من قبل."},
+      {t:"def",q:"عرّف الظهار لغةً.",a:"مأخوذ من الظهر؛ لأن صورته الأصلية أن يقول الزوج لامرأته: أنت عليَّ كظهر أمي."},
+      {t:"why",q:"علل: الظهار من الكبائر.",a:"لأنه تحريم لما أحل الله بغير حق، وفيه ظلم للزوجة وتعليل للفراش."},
+      {t:"why",q:"علل: لا يحل للمظاهر وطء زوجته حتى يكفر.",a:"لأن الكفارة شرط لرفع التحريم الحاصل بالظهار."},
+      {t:"sit",q:"ما الحكم: قال رجل لزوجته (أنتِ عليَّ كخالتي)؟",a:"يقع الظهار، لأن خالته أنثى محرمة عليه، فيلزمه ما يلزم المظاهر من الكفارة إذا عاد."},
+      {t:"sit",q:"ما الحكم: عجز المظاهر عن خصال الكفارة الثلاث؟",a:"تستقر الكفارة في ذمته، فإن قدر على بعضها أخرجه، وبقي الباقي في ذمته."},
+      {t:"sit",q:"ما الحكم: ظاهر من زوجته وأراد مراجعتها؟",a:"لا يحل له مراجعتها حتى يكفر كفارة الظهار كاملة."},
+      {t:"compare",q:"قارن بين الظهار المتبوع بالطلاق والظهار غير المتبوع بالطلاق.",a:"الظهار غير المتبوع بالطلاق تلزمه الكفارة إذا عاد، أما المتبوع بالطلاق فلا كفارة فيه لأنه يصير طلاقاً."},
+      {t:"mcq",q:"قول الزوج لزوجته (أنتِ عليَّ محرمة كما أن أمي محرمة):",o:["ليس ظهاراً","ظهار","طلاق","يمين"],a:1},
+      {t:"tf",q:"يجب في صوم كفارة الظهار نية من الليل.",a:true},
+      {t:"mcq",q:"إذا أخرج المظاهر بعض الكفارة ثم عجز:",o:["ضمنها","بقي الباقي في ذمته","سقط عنه","يعيد"],a:1}
+    ]
+  },
+  {
+    id:2, title:"العدة وأحكام المعتدة", icon:"⏳",
+    summary:"العدة شرعاً: مدة تنتظرها المرأة لمعرفة براءة رحمها من الحمل أو للتعبد. حكمتها: صيانة الأنساب. أنواعها: المتوفى عنها زوجها (حامل بوضع الحمل، أو حائل بأربعة أشهر وعشرة)، والمطلقة (حامل بوضع الحمل، أو من ذوات الحيض بثلاثة قروء، أو صغيرة/آيسة بثلاثة أشهر). يجب على المتوفى عنها الإحداد، ويجب للرجعية النفقة والسكنى، وللبائن الحامل النفقة.",
+    points:[
+      "العدة: مدة انتظار المرأة لبراءة رحمها أو للتعبد",
+      "حكمتها: صيانة الأنساب",
+      "المتوفى عنها الحامل: عدتها وضع الحمل",
+      "المتوفى عنها غير الحامل: 4 أشهر و10 أيام",
+      "المطلقة الحامل: عدتها وضع الحمل",
+      "المطلقة من ذوات الحيض: 3 قروء (أطهار)",
+      "الصغيرة والآيسة: 3 أشهر",
+      "المطلقة قبل الدخول: لا عدة عليها",
+      "الإحداد واجب على المتوفى عنها",
+      "الرجعية لها النفقة والسكنى، البائن الحامل لها النفقة"
+    ],
+    questions:[
+      {t:"mcq",q:"العدة لغةً مأخوذة من:",o:["العَدد","العَدّ","العاد","العدو"],a:0},
+      {t:"mcq",q:"العدة شرعاً:",o:["مدة انتظار المرأة لبراءة رحمها أو للتعبد","مدة الحمل","سنة بعد الطلاق","أربعون يوماً"],a:0},
+      {t:"tf",q:"شرعت العدة صيانة للأنساب.",a:true},
+      {t:"mcq",q:"عدة المتوفى عنها زوجها الحامل:",o:["أربعة أشهر وعشرة","وضع الحمل","ثلاثة قروء","ثلاثة أشهر"],a:1},
+      {t:"mcq",q:"عدة المتوفى عنها زوجها غير الحامل:",o:["ثلاثة أشهر","ثلاثة قروء","أربعة أشهر وعشرة أيام","سنة"],a:2},
+      {t:"mcq",q:"عدة المطلقة الحامل:",o:["ثلاثة قروء","وضع الحمل","أربعة أشهر وعشرة","ثلاثة أشهر"],a:1},
+      {t:"mcq",q:"عدة المطلقة من ذوات الحيض:",o:["ثلاثة قروء (أطهار)","ثلاثة أشهر","وضع الحمل","أربعون يوماً"],a:0},
+      {t:"mcq",q:"عدة الصغيرة أو الكبيرة التي لم تحض ولم تبلغ سن اليأس:",o:["ثلاثة قروء","ثلاثة أشهر هلالية","أربعة أشهر","سنة"],a:1},
+      {t:"tf",q:"المطلقة قبل الدخول لا عدة عليها.",a:true},
+      {t:"mcq",q:"الإحداد لغةً:",o:["الزينة","المنع","الحزن","البكاء"],a:1},
+      {t:"mcq",q:"الإحداد شرعاً:",o:["البكاء على الميت","الامتناع من الزينة في البدن والثوب","ترك الطعام","ترك الكلام"],a:1},
+      {t:"tf",q:"يجب الإحداد على المتوفى عنها زوجها.",a:true},
+      {t:"tf",q:"يجب الإحداد على المطلقة.",a:false},
+      {t:"mcq",q:"مدة الإحداد على الزوج:",o:["ثلاثة أيام","أربعة أشهر وعشرة","سنة","أربعون يوماً"],a:1},
+      {t:"mcq",q:"مدة الإحداد على غير الزوج:",o:["ثلاثة أيام فأقل","أربعة أشهر","سنة","لا حد لها"],a:0},
+      {t:"mcq",q:"ما يجب للرجعية:",o:["النفقة فقط","السكنى فقط","النفقة والسكنى","لا شيء"],a:2},
+      {t:"mcq",q:"ما يجب للبائن:",o:["النفقة والسكنى","النفقة فقط دون السكنى","السكنى فقط","لا شيء"],a:1},
+      {t:"mcq",q:"ما يجب للبائن الحامل:",o:["لا شيء","النفقة فقط","النفقة والسكنى","السكنى فقط"],a:1},
+      {t:"tf",q:"يجب على المتوفى عنها والمطلقة ملازمة البيت مدة العدة.",a:true},
+      {t:"tf",q:"يجوز للمعتدة الخروج لحاجة كشراء ما يلزمها.",a:true},
+      {t:"fill",q:"عدة المتوفى عنها غير الحامل ............ أشهر و ............ أيام.",a:"أربعة عشرة"},
+      {t:"fill",q:"عدة المطلقة من ذوات الحيض ............ قروء.",a:"ثلاثة"},
+      {t:"fill",q:"المطلقة قبل الدخول ............ عدة عليها.",a:"لا"},
+      {t:"def",q:"عرّف العدة شرعاً.",a:"مدة تنتظرها المرأة لمعرفة براءة رحمها من الحمل أو للتعبد."},
+      {t:"def",q:"عرّف الإحداد شرعاً.",a:"الامتناع من الزينة في البدن كالكحل والطيب، وفي الثوب بترك لبس ذي لون يقصد به الزينة."},
+      {t:"why",q:"علل: شرعت العدة.",a:"صيانة للأنساب وتحصيناً لها عن الاختلاط."},
+      {t:"why",q:"علل: المطلقة قبل الدخول لا عدة عليها.",a:"لعدم الاحتياج لمعرفة براءة الرحم لعدم الدخول، ولقوله تعالى: يا أيها الذين آمنوا إذا نكحتم المؤمنات ثم طلقتموهن من قبل أن تمسوهن فما لكم عليهن من عدة تعتدونها."},
+      {t:"sit",q:"ما الحكم: توفى زوج المرأة الحامل؟",a:"عدتها وضع الحمل مطلقاً، لقوله تعالى: وأولات الأحمال أجلهن أن يضعن حملهن."},
+      {t:"sit",q:"ما الحكم: طلقت امرأة من ذوات الحيض؟",a:"عدتها ثلاثة قروء (أطهار)."},
+      {t:"sit",q:"ما الحكم: استعملت المتوفى عنها الطيب؟",a:"يحرم عليها ذلك في الإحداد إلا لحاجة كاكتحال رمَدٍ تستعمله ليلاً وتمسحه نهاراً."},
+      {t:"compare",q:"قارن بين عدة المتوفى عنها وعدة المطلقة من ذوات الحيض.",a:"المتوفى عنها: 4 أشهر وعشرة أيام، المطلقة: 3 قروء. والمتوفى عنها يجب عليها الإحداد والملازمة، والمطلقة تلزم الملازمة دون الإحداد."},
+      {t:"mcq",q:"الأشهر في عدة المتوفى عنها تعتبر بـ:",o:["الأيام","الأهلة ما أمكن","الأسابيع","الشهور الميلادية"],a:1},
+      {t:"tf",q:"يجوز للمعتدة أن تبيت عند جارتها بشرط أن ترجع إلى بيتها.",a:true},
+      {t:"tf",q:"لا يجوز للمعتدة الخروج من بيتها وإن رضي زوجها إلا لحاجة.",a:true},
+      {t:"mcq",q:"يجب على القاضي إذا طلبت المعتدة الخروج لحاجة:",o:["منعها","إجابتها","تطليقها","سجنها"],a:1}
+    ]
+  },
+  {
+    id:3, title:"الرضاع", icon:"🍼",
+    summary:"الرضاع شرعاً: وصول لبن امرأة آدمية مخصوصة إلى جوف آدمي مخصوص على وجه مخصوص. أركانه ثلاثة: المرضع، الرضيع، اللبن. يثبت بشهادة رجلين أو رجل وامرأتين أو أربع نسوة. شروط التحريم: أن يكون الرضيع دون الحولين، وأن تكون الرضعات خمساً متفرقات، وأن يصل اللبن إلى جوف الطفل. يحرم من الرضاع ما يحرم من النسب.",
+    points:[
+      "الرضاع: وصول لبن امرأة آدمية إلى جوف آدمي",
+      "أركانه: المرضع، الرضيع، اللبن",
+      "يشترط في المرضع: أن تكون امرأة آدمية بالغة حية",
+      "يثبت بشهادة رجلين أو رجل وامرأتين أو أربع نسوة",
+      "شروط التحريم: دون الحولين، 5 رضعات متفرقات، وصول اللبن للجوف",
+      "يحرم من الرضاع ما يحرم من النسب",
+      "يحرم على الرضيع: المرضعة وأصولها وفروعها وحواشيها",
+      "يحرم على المرضعة: الرضيع وولده وإن سفل"
+    ],
+    questions:[
+      {t:"mcq",q:"الرضاع لغةً:",o:["شرب اللبن","مص الثدي مع شرب لبنه","الأكل","الشرب"],a:1},
+      {t:"mcq",q:"الرضاع شرعاً:",o:["شرب اللبن","وصول لبن امرأة آدمية إلى جوف آدمي على وجه مخصوص","مص الثدي","أكل الطعام"],a:1},
+      {t:"tf",q:"يحرم من الرضاع ما يحرم من النسب.",a:true},
+      {t:"mcq",q:"عدد أركان الرضاع:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من أركان الرضاع:",o:["الأب","المرضع","القاضي","الولي"],a:1},
+      {t:"mcq",q:"يشترط في المرضع أن تكون:",o:["ذكراً","امرأة آدمية بالغة حية","صغيرة","كتابية فقط"],a:1},
+      {t:"mcq",q:"يثبت الرضاع بشهادة:",o:["رجلين فقط","رجلين أو رجل وامرأتين أو أربع نسوة","امرأة واحدة","ثلاث نسوة"],a:1},
+      {t:"mcq",q:"عدد الرضعات المحرمات:",o:["ثلاث","أربع","خمس","ست"],a:2},
+      {t:"tf",q:"يشترط أن يكون الرضيع دون الحولين.",a:true},
+      {t:"tf",q:"يجب أن تكون الرضعات متفرقات.",a:true},
+      {t:"tf",q:"لا يشترط وصول اللبن إلى جوف الطفل.",a:false},
+      {t:"tf",q:"يثبت التحريم بلبن المرأة الميتة.",a:false},
+      {t:"tf",q:"لو رضع الطفل بعد الحولين لا يثبت التحريم.",a:true},
+      {t:"mcq",q:"من يحرم على الرضيع:",o:["المرضعة وأخواتها فقط","المرضعة وكل من انتمى إليها بنسب أو رضاع","إخوة الرضيع","أعمام الرضيع"],a:1},
+      {t:"mcq",q:"من يحرم على المرضعة:",o:["الرضيع فقط","الرضيع ومن انتسب إليه كولده وإن سفل","إخوة الرضيع","أعمام الرضيع"],a:1},
+      {t:"mcq",q:"لا يحرم على المرضعة:",o:["الرضيع","ولد الرضيع","إخوة الرضيع الذين لم يرضعوا","أصول الرضيع"],a:2},
+      {t:"fill",q:"أركان الرضاع ............ أركان.",a:"ثلاثة"},
+      {t:"fill",q:"عدد الرضعات المحرمات ............ رضعات.",a:"خمس"},
+      {t:"fill",q:"يحرم من الرضاع ما يحرم من ............",a:"النسب"},
+      {t:"def",q:"عرّف الرضاع شرعاً.",a:"وصول لبن امرأة آدمية مخصوصة إلى جوف آدمي مخصوص على وجه مخصوص."},
+      {t:"why",q:"علل: حكمة التحريم بالرضاع.",a:"لأن لبن المرضعة صار جزءاً من الرضيع، فصار الرضيع جزءاً منها."},
+      {t:"why",q:"علل: يشترط أن يكون الرضيع دون الحولين.",a:"لأن الحولين هما مدة الرضاع الشرعية، لقوله تعالى: والحولين کاملين لمن أراد أن يتم الرضاعة."},
+      {t:"sit",q:"ما الحكم: لم يصل اللبن من المرضعة إلى جوف الرضيع؟",a:"لا يثبت التحريم، لأن وصول اللبن إلى الجوف شرط في التحريم."},
+      {t:"sit",q:"ما الحكم: أرضعت امرأة طفلاً 4 رضعات فقط؟",a:"لا يثبت التحريم، لأن الشرط خمس رضعات متفرقات."},
+      {t:"compare",q:"قارن بين التحريم بالنسب والتحريم بالرضاع.",a:"يجتمعان في التحريم، ويختلفان في أن الرضاع له شروط خاصة (خمس رضعات، حولين، وصول للجوف) والنسب ثابت بلا شروط."},
+      {t:"mcq",q:"حكم لبن المرأة الميتة في التحريم:",o:["يثبت التحريم","لا يثث التحريم","مختلف فيه","يجوز"],a:1},
+      {t:"mcq",q:"إذا أرضعت امرأة ولداً صار زوج المرضعة:",o:["أخاً للرضيع","أباً للرضيع","عمّاً للرضيع","خالاً للرضيع"],a:1},
+      {t:"tf",q:"يجوز للمرضع أن تتزوج بإخوة الرضيع الذين لم يرضعوا معه.",a:true},
+      {t:"tf",q:"يشترط في المرضع أن تكون بالغة.",a:true}
+    ]
+  },
+  {
+    id:4, title:"النفقات", icon:"💰",
+    summary:"النفقة مأخوذة من الإنفاق وهو الإخراج. أسبابها ثلاثة: القرابة، الزوجية، الملك. نفقة القرابة تجب للأصول والفروع بشرط الفقر وقدرة المنفق. نفقة الزوجة واجبة على الزوج يوم بيوم، ومدّ طعام للموسر، ومدّ ونصف للمتوسط، ومدّ للمعسر. نفقة البهائم واجبة على مالكها.",
+    points:[
+      "أسباب النفقة ثلاثة: القرابة، الزوجية، الملك",
+      "نفقة الوالدين بشرط: الفقر والعلو",
+      "نفقة الأبناء بثلاثة شروط: الفقر والصغر، أو الفقر والمرض، أو الفقر والجنون",
+      "نفقة الزوجة واجبة يوم بيوم",
+      "الموسر: مدّ طعام، المتوسط: مدّ ونصف، المعسر: مدّ",
+      "لا يكلف الوالد الفقير بالعمل",
+      "نفقة البهائم واجبة على مالكها"
+    ],
+    questions:[
+      {t:"mcq",q:"النفقة مأخوذة من:",o:["الإنفاق وهو الإخراج","النفق","النفاق","الإنفاق الشرعي"],a:0},
+      {t:"mcq",q:"عدد أسباب النفقة:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من أسباب النفقة:",o:["القرابة فقط","الزوجية فقط","الملك فقط","القرابة والزوجية والملك"],a:3},
+      {t:"tf",q:"نفقة الأقارب واجبة.",a:true},
+      {t:"mcq",q:"شرطا نفقة الوالدين:",o:["الغنى والعلو","الفقر والعلو","الصغر والفقر","المرض والفقر"],a:1},
+      {t:"mcq",q:"من شروط نفقة الأبناء:",o:["الفقر والصغر","الغنى والصغر","الفقر والغنى","الصغر فقط"],a:0},
+      {t:"mcq",q:"من شروط نفقة الأبناء:",o:["الفقر والمرض","الغنى والمرض","الصغر والمرض","الجنون فقط"],a:0},
+      {t:"mcq",q:"من شروط نفقة الأبناء:",o:["الفقر والجنون","الغنى والجنون","الصغر والجنون","العقل"],a:0},
+      {t:"tf",q:"يجوز للولد أن يكلف والده الفقير بالعمل.",a:false},
+      {t:"mcq",q:"نفقة الزوجة واجبة:",o:["شهرياً","يوم بيوم","سنوياً","أسبوعياً"],a:1},
+      {t:"mcq",q:"نفقة الزوجة الموسر:",o:["مدّ طعام","مدّ ونصف","مدّين","نصف مدّ"],a:0},
+      {t:"mcq",q:"نفقة الزوجة المتوسط:",o:["مدّ طعام","مدّ ونصف","مدّين","نصف مدّ"],a:1},
+      {t:"mcq",q:"نفقة الزوجة المعسر:",o:["مدّ طعام","مدّ ونصف","مدّين","لا شيء"],a:0},
+      {t:"tf",q:"نفقة البهائم واجبة على مالكها.",a:true},
+      {t:"tf",q:"تسقط نفقة الزوجة بالنشوز.",a:true},
+      {t:"mcq",q:"متى تسقط نفقة الزوجة:",o:["بالطاعة","بالنشوز","بالفقر","بالمرض"],a:1},
+      {t:"fill",q:"أسباب النفقة ............ أسباب.",a:"ثلاثة"},
+      {t:"fill",q:"نفقة الزوجة الموسر ............ طعام.",a:"مدّ"},
+      {t:"fill",q:"نفقة الزوجة المتوسط ............ ونصف.",a:"مدّ"},
+      {t:"def",q:"عرّف النفقة.",a:"هي الإنفاق وهو الإخراج، ولا يستعمل إلا في الخير."},
+      {t:"why",q:"علل: لا يكلف الوالد الفقير بالعمل.",a:"لأنه ليس من المعاشرة بالمعروف تكليفه العمل مع كبر السن."},
+      {t:"sit",q:"ما الحكم: امتنعت الزوجة عن طاعة زوجها؟",a:"تسقط نفقتها وسكنها، فإذا عادت إلى الطاعة عاد إليها حقها."},
+      {t:"sit",q:"ما الحكم: كان الابن غنياً قادراً؟",a:"لا تجب نفقته على والده."},
+      {t:"why",q:"علل: وجوب نفقة البهائم على مالكها.",a:"لحرمتها ولقول النبي ﷺ: دخلت امرأة النار في هرة ربطتها فلم تطعمها."},
+      {t:"compare",q:"قارن بين نفقة الزوجة الموسر والمعسر.",a:"الموسر: مدّ طعام من غالب قوت البلد، المعسر: مدّ طعام أيضاً، والمتوسط: مدّ ونصف، والفرق بحسب حال الزوج."},
+      {t:"mcq",q:"يجب على الزوج تمليك زوجته الطعام:",o:["مطبوخاً","حبّاً","دقيقاً","مطحوناً"],a:1},
+      {t:"tf",q:"يجب على الزوج طحن الطعام وخبزه.",a:true},
+      {t:"mcq",q:"الأجداد والجدات في النفقة:",o:["لا نفقة لهم","ملحقون بالأصول","نفقة مستحبة","مختلف فيهم"],a:1}
+    ]
+  },
+  {
+    id:5, title:"الحضانة", icon:"👶",
+    summary:"الحضانة شرعاً: تربية من لا يستقل بأمور نفسه لصغر أو جنون بفعل ما يصلحه ودفع ما يضره. الأم أحق بالحضانة بعد الفرقة. مدتها إلى بلوغ المحضون سبع سنين، ثم يخير بعدها. شروطها خمسة: العقل، الدين، العفة، الإقامة في بلد الطفل، خلو أم المحضون من زوج ليس له حق في الحضانة.",
+    points:[
+      "الحضانة: تربية من لا يستقل بأمور نفسه",
+      "الأم أحق بالحضانة بعد الفرقة",
+      "الواجب على الحاضنة: الأفعال فقط",
+      "مؤنة الحضانة في مال المحضون إن كان له مال",
+      "مدة الحضانة: حتى بلوغ سبع سنين",
+      "بعد سبع سنين يخير المميز بين أبويه",
+      "شروطها خمسة: العقل، الدين، العفة، الإقامة، خلو الأم من زوج أجنبي"
+    ],
+    questions:[
+      {t:"mcq",q:"الحضانة لغةً مأخوذة من:",o:["الحضن وهو الجنب","الحضارة","الحضور","الحض"],a:0},
+      {t:"mcq",q:"الحضانة شرعاً:",o:["تربية الطفل","تربية من لا يستقل بأمور نفسه لصغر أو جنون","حضانة المريض","رعاية الكبير"],a:1},
+      {t:"mcq",q:"الواجب على الحاضنة تجاه المحضون:",o:["الأعيان فقط","الأفعال فقط","كلاهما","لا شيء"],a:1},
+      {t:"mcq",q:"من الأحق بالحضانة بعد الفرقة:",o:["الأب","الأم","الجد","العم"],a:1},
+      {t:"mcq",q:"مؤنة الحضانة تكون في:",o:["مال الأب","مال الحاضنة","مال المحضون إن كان له مال","مال الأم"],a:2},
+      {t:"mcq",q:"مدة حضانة الزوجة:",o:["إلى خمس سنين","إلى بلوغ المحضون سبع سنين","إلى البلوغ","إلى عشر سنين"],a:1},
+      {t:"mcq",q:"بعد انتهاء مدة الحضانة:",o:["يبقى الولد عند أمه","ينتقل إلى الأب","يخير بين أبويه","يحكم له القاضي"],a:2},
+      {t:"mcq",q:"عدد شروط استحقاق الحضانة:",o:["ثلاثة","أربعة","خمسة","ستة"],a:2},
+      {t:"tf",q:"من شروط الحضانة العقل.",a:true},
+      {t:"tf",q:"من شروط الحضانة الدين (الإسلام).",a:true},
+      {t:"tf",q:"من شروط الحضانة العفة والأمانة.",a:true},
+      {t:"tf",q:"من شروط الحضانة الإقامة في بلد الطفل.",a:true},
+      {t:"tf",q:"لا يشترط خلو أم المحضون من زوج.",a:false},
+      {t:"mcq",q:"إذا اختل شرط من شروط الحضانة في الحاضن:",o:["تبقى الحضانة","تسقط الحضانة","تنتقل لقريب","لا شيء"],a:1},
+      {t:"mcq",q:"إذا امتنعت الأم من حضانة ولدها:",o:["تجبر","تنتقل الحضانة لأمهاتها","تنتقل للأب","لا شيء"],a:1},
+      {t:"fill",q:"مدة حضانة الزوجة إلى بلوغ المحضون ............ سنين.",a:"سبع"},
+      {t:"fill",q:"شروط استحقاق الحضانة ............ شروط.",a:"خمسة"},
+      {t:"fill",q:"مؤنة الحضانة تكون في ............ المحضون.",a:"مال"},
+      {t:"def",q:"عرّف الحضانة شرعاً.",a:"تربية من لا يستقل بأمور نفسه لصغر أو جنون، بفعل ما يصلحه، ودفع ما يضره."},
+      {t:"why",q:"علل: الواجب على الحاضنة الأفعال فقط.",a:"لأن الحضانة هي القيام بمصالح الطفل من غسل وثياب وشراب، أما المال ففي مال المحضون."},
+      {t:"sit",q:"ما الحكم: كانت الحاضنة فاسقة؟",a:"تسقط حضانتها، لأن العفة والأمانة والعدالة الظاهرة شرط في الحاضنة."},
+      {t:"sit",q:"ما الحكم: أراد أحد الأبوين سفراً طويلاً؟",a:"يكون الولد مع المقيم من أبويه حتى يعود المسافر، ولو أراد أحدهما انتقالاً دائماً فالأب أولى."},
+      {t:"sit",q:"ما الحكم: تزوجت أم المحضون برجل أجنبي؟",a:"تسقط حضانتها، لأن من شروط الحضانة خلو أم المحضون من زوج ليس له حق في الحضانة."},
+      {t:"compare",q:"قارن بين الأفعال والأعيان في الحضانة.",a:"الأفعال كالغسل والتربية على الحاضنة، أما الأعيان كالصابون والثياب ففي مال المحضون إن كان له مال، وإلا فعلى من يجب عليه نفقته."},
+      {t:"mcq",q:"إذا كان في أحد الأبوين نقص كجنون:",o:["يخير الولد","الحق للآخر","تسقط الحضانة","يحكم القاضي"],a:1},
+      {t:"tf",q:"يجوز للحاضنة السفر بالطفل من بلد أبيه.",a:false},
+      {t:"mcq",q:"إذا تزوجت الحاضنة بمن له حق في الحضانة كعم الطفل:",o:["تسقط حضانتها","لا تسقط حضانتها","يختلف","تنتقل"],a:1}
+    ]
+  },
+  {
+    id:6, title:"الجنايات وأنواع القتل", icon:"⚔️",
+    summary:"القتل ثلاثة أنواع: العمد المحض (قصد الشخص بشيء يقتل غالباً) يجب فيه القود أو الدية المغلظة، الخطأ المحض (رمى صيداً فأصاب رجلاً) يجب فيه الدية المخففة على العاقلة مؤجلة، عمد الخطأ (شبه العمد) (قصد بشيء لا يقتل غالباً) يجب فيه الدية المغلظة على العاقلة مؤجلة. شروط القصاص: البلوغ، العقل، ألا يكون أباً، عصمة القتيل.",
+    points:[
+      "القتل ثلاثة أنواع: عمد محض، خطأ محض، شبه عمد",
+      "العمد المحض: قصد بشيء يقتل غالباً، يجب فيه القود",
+      "الخطأ المحض: رمى صيداً فأصاب رجلاً، يجب فيه الدية المخففة",
+      "شبه العمد: قصد بشيء لا يقتل غالباً، يجب فيه الدية المغلظة",
+      "شروط القصاص: البلوغ، العقل، ألا يكون أباً، عصمة القتيل",
+      "تقتل الجماعة بالواحد",
+      "القصاص يجري في الأطراف والمعاني"
+    ],
+    questions:[
+      {t:"mcq",q:"القتل ثلاثة أضرب:",o:["عمد وخطأ فقط","عمد محض وخطأ محض وعمد خطأ","عمد وخطأ وشبه عمد","ثلاثة أنواع مختلفة"],a:1},
+      {t:"mcq",q:"العمد المحض هو:",o:["أن يرمي صيداً فيصيب رجلاً","أن يقصد بشيء يقتل غالباً","أن يقصد بعصاً لا تقتل","أن يخطئ"],a:1},
+      {t:"mcq",q:"الخطأ المحض هو:",o:["أن يقصد بشيء يقتل","أن يرمي صيداً فيصيب رجلاً","أن يضرب بعصاً","أن يتعمد"],a:1},
+      {t:"mcq",q:"شبه العمد (عمد الخطأ) هو:",o:["أن يقصد بشيء لا يقتل غالباً","أن يرمي صيداً","أن يتعمد القتل","أن يخطئ"],a:0},
+      {t:"mcq",q:"الواجب في العمد المحض:",o:["دية مخففة","القود (القصاص)","دية مغلظة","لا شيء"],a:1},
+      {t:"mcq",q:"إذا عفا المستحق في العمد المحض على الدية:",o:["يجب دية مخففة","يجب دية مغلظة حالّة في مال القاتل","يجب دية على العاقلة","لا شيء"],a:1},
+      {t:"mcq",q:"الواجب في الخطأ المحض:",o:["القود","دية مخففة مؤجلة على العاقلة","دية مغلظة","لا شيء"],a:1},
+      {t:"mcq",q:"الواجب في شبه العمد:",o:["القود","دية مغلظة على العاقلة مؤجلة","دية مخففة","لا شيء"],a:1},
+      {t:"tf",q:"يجب القصاص على الصبي.",a:false},
+      {t:"tf",q:"يجب القصاص على المجنون.",a:false},
+      {t:"tf",q:"لا قصاص على والد بقتل ولده.",a:true},
+      {t:"tf",q:"يقتل الشاب بالشيخ.",a:true},
+      {t:"tf",q:"يقتل الذكر بالأنثى وبالعكس.",a:true},
+      {t:"tf",q:"تقتل الجماعة بالواحد.",a:true},
+      {t:"mcq",q:"العاقلة هم:",o:["أهل القاتل","عصبة الجاني إلا أصله وفرعه","الوالدان","الإخوة فقط"],a:1},
+      {t:"mcq",q:"مدة تأجيل الدية المخففة:",o:["سنة","سنتان","ثلاث سنين","خمس سنين"],a:2},
+      {t:"fill",q:"القتل ثلاثة أضرب: عمد ............ وخطأ ............ وعمد ............",a:"محض محض خطأ"},
+      {t:"fill",q:"الواجب في العمد المحض ............",a:"القود"},
+      {t:"fill",q:"الدية المخففة مؤجلة في ............ سنين.",a:"ثلاث"},
+      {t:"def",q:"عرّف العمد المحض.",a:"أن يعمد الجاني إلى ضرب الشخص المقصود بالجناية بشيء يقتل غالباً."},
+      {t:"def",q:"عرّف الخطأ المحض.",a:"أن يرمي إلى شيء كصيد فيصيب رجلاً فيقتله."},
+      {t:"def",q:"عرّف شبه العمد.",a:"أن يقصد ضرب الشخص بشيء لا يقتل غالباً كعصاً فيموت المضروب."},
+      {t:"why",q:"علل: لا قصاص على صبي.",a:"لأن القصاص يشترط فيه أن يكون القاتل بالغاً، فلا قصاص على صبي."},
+      {t:"why",q:"علل: لا قصاص على والد بقتل ولده.",a:"لأن النبي ﷺ قال: لا يقاد الوالد بالولد."},
+      {t:"sit",q:"ما الحكم: ضرب رجل آخر بحجر كبير فقتله؟",a:"هذا عمد محض، يجب فيه القود، فإن عفا الولي عن القود وجبت الدية المغلظة الحالة في مال القاتل."},
+      {t:"sit",q:"ما الحكم: رمى صيداً فأصاب رجلاً فقتله؟",a:"هذا خطأ محض، يجب فيه دية مخففة مؤجلة على العاقلة في ثلاث سنين."},
+      {t:"compare",q:"قارن بين العمد المحض والخطأ المحض.",a:"العمد المحض: قصد بشيء يقتل غالباً ويجب فيه القود. الخطأ المحض: رمى صيداً فأصاب رجلاً، يجب فيه الدية المخففة على العاقلة مؤجلة."},
+      {t:"mcq",q:"شروط القصاص في القتل عددها:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"يجب القصاص على من زال عقله بشرب مسكر متعدٍ.",a:true},
+      {t:"tf",q:"يجري القصاص في الأطراف والمعاني كالسمع والبصر.",a:true},
+      {t:"mcq",q:"من شروط القصاص في الأعضاء:",o:["الاشتراك في الاسم الخاص","التساوي في السن","التساوي في اللون","التساوي في الحجم"],a:0}
+    ]
+  },
+  {
+    id:7, title:"الديات", icon:"🐪",
+    summary:"الدية: المال الواجب بسبب الجناية على النفس أو ما دونها، وهي مائة من الإبل أو بدلها. أنواعها: مغلظة (في مال القاتل، حالّة، مثلثة) في العمد إذا عفي عن القصاص وشبه العمد. مخففة (على العاقلة، مؤجلة في ثلاث سنين، مخمسة) في الخطأ. دية المرأة نصف دية الرجل. تغلظ دية الخطأ في ثلاثة مواضع: الحرم، الأشهر الحرم، قريب ذي رحم محرم.",
+    points:[
+      "الدية: مائة من الإبل",
+      "دية المرأة نصف دية الرجل (50 من الإبل)",
+      "المغلظة: في مال القاتل، حالّة، مثلثة",
+      "المخففة: على العاقلة، مؤجلة، مخمسة",
+      "تغلظ دية الخطأ في: الحرم، الأشهر الحرم، قريب ذي رحم محرم",
+      "في الجنين: غرّة (عُشر دية الأم)",
+      "اليدين: دية كاملة، الرجلين: دية كاملة"
+    ],
+    questions:[
+      {t:"mcq",q:"الدية هي:",o:["المال الواجب بسبب الجناية على النفس أو ما دونها","القصاص","السجن","العقوبة"],a:0},
+      {t:"mcq",q:"مقدار الدية:",o:["خمسون من الإبل","مائة من الإبل","عشر من الإبل","مائتا من الإبل"],a:1},
+      {t:"tf",q:"دية المرأة على النصف من دية الرجل.",a:true},
+      {t:"mcq",q:"دية المرأة:",o:["مائة من الإبل","خمسون من الإبل","عشر من الإبل","سبعون من الإبل"],a:1},
+      {t:"mcq",q:"أنواع الدية:",o:["مغلظة فقط","مخففة فقط","مغلظة ومخففة","ثلاثة أنواع"],a:2},
+      {t:"mcq",q:"من أوجه تغليظ الدية:",o:["كونها في مال القاتل","كونها على العاقلة","كونها مؤجلة","كونها مخمسة"],a:0},
+      {t:"mcq",q:"من أوجه تغليظ الدية:",o:["كونها حالّة","كونها مؤجلة","كونها مخمسة","كونها على العاقلة"],a:0},
+      {t:"mcq",q:"من أوجه تغليظ الدية:",o:["كونها مثلثة","كونها مخمسة","كونها مؤجلة","كونها على العاقلة"],a:0},
+      {t:"mcq",q:"من أوجه تخفيف الدية:",o:["كونها في مال القاتل","كونها حالّة","كونها مثلثة","كونها على العاقلة"],a:3},
+      {t:"mcq",q:"من أوجه تخفيف الدية:",o:["كونها مؤجلة","كونها حالّة","كونها في مال القاتل","كونها مثلثة"],a:0},
+      {t:"mcq",q:"من أوجه تخفيف الدية:",o:["كونها مخمسة","كونها مثلثة","كونها حالّة","كونها في مال القاتل"],a:0},
+      {t:"mcq",q:"الدية المغلظة تكون:",o:["مثلثة حالّة في مال القاتل","مخمسة مؤجلة على العاقلة","مثلثة مؤجلة","مخمسة حالّة"],a:0},
+      {t:"mcq",q:"الدية المخففة تكون:",o:["مثلثة حالّة في مال القاتل","مخمسة مؤجلة على العاقلة","مثلثة مؤجلة","مخمسة حالّة"],a:1},
+      {t:"tf",q:"الدية المغلظة مثلثة من ثلاثين حقة وثلاثين جذعة وأربعين خلفة.",a:true},
+      {t:"tf",q:"الدية المخففة مخمسة.",a:true},
+      {t:"mcq",q:"عدد مواضع تغليظ دية الخطأ:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من مواضع تغليظ دية الخطأ:",o:["الحرم","المسجد","البيت","السوق"],a:0},
+      {t:"mcq",q:"من مواضع تغليظ دية الخطأ:",o:["رمضان","الأشهر الحرم","يوم الجمعة","العيد"],a:1},
+      {t:"mcq",q:"من مواضع تغليظ دية الخطأ:",o:["قتل قريب ذي رحم محرم","قتل الجار","قتل الصديق","قتل الغريب"],a:0},
+      {t:"mcq",q:"ما يجب في الجنين الحر:",o:["دية كاملة","نصف دية","غرّة (عُشر دية الأم)","لا شيء"],a:2},
+      {t:"mcq",q:"الغرّة هي:",o:["نصف دية","عُشر دية الأم","عُشر دية الأب","دية كاملة"],a:1},
+      {t:"mcq",q:"ما يجب في قطع اليدين من الكوعين:",o:["نصف دية","دية كاملة","ثلث دية","لا شيء"],a:1},
+      {t:"mcq",q:"ما يجب في قطع الرجلين من الكعبين:",o:["نصف دية","دية كاملة","ثلث دية","لا شيء"],a:1},
+      {t:"mcq",q:"ما يجب في قطع مارن الأنف:",o:["نصف دية","دية كاملة","ثلث دية","لا شيء"],a:1},
+      {t:"mcq",q:"ما يجب في كل يد:",o:["نصف دية","دية كاملة","ثلث دية","عشر دية"],a:0},
+      {t:"mcq",q:"ما يجب في قطع إحدى الأذنين:",o:["نصف دية","دية كاملة","ثلث دية","عُشر دية"],a:0},
+      {t:"mcq",q:"ما يجب في قلع العينين:",o:["نصف دية","دية كاملة","ثلث دية","لا شيء"],a:1},
+      {t:"mcq",q:"ما يجب في كل عين:",o:["نصف دية","دية كاملة","ثلث دية","عُشر دية"],a:0},
+      {t:"fill",q:"مقدار الدية ............ من الإبل.",a:"مائة"},
+      {t:"fill",q:"دية المرأة ............ من الإبل.",a:"خمسون"},
+      {t:"fill",q:"ما يجب في الجنين ............",a:"غرّة"},
+      {t:"def",q:"عرّف الدية.",a:"هي المال الواجب بسبب الجناية على النفس أو ما دونها، وهي مائة من الإبل أو بدلها عند فقدها."},
+      {t:"why",q:"علل: دية المرأة على النصف من دية الرجل.",a:"تغليظاً وتخفيفاً، لأن الإسلام قدر دية المرأة نصف دية الرجل."},
+      {t:"sit",q:"ما الحكم: قتل مسلم خطأً في الحرم؟",a:"تغلظ دية الخطأ بالتثليث فقط بدل التخميس، لأن الحرم من مواضع التغليظ."},
+      {t:"compare",q:"قارن بين الدية المغلظة والدية المخففة.",a:"المغلظة: في مال القاتل، حالّة، مثلثة. المخففة: على العاقلة، مؤجلة في ثلاث سنين، مخمسة."},
+      {t:"mcq",q:"إذا عدمت الإبل تنتقل إلى:",o:["ألف دينار","اثنا عشر ألف درهم","قيمتها وقت الوجوب","كلاهما صحيح في قول"],a:3},
+      {t:"tf",q:"الإيضاح هو وصول الجرح إلى العظم.",a:true},
+      {t:"tf",q:"في ذهاب الكلام كله دية كاملة.",a:true}
+    ]
+  },
+  {
+    id:8, title:"حد الزنا والتعزير", icon:"🔒",
+    summary:"الزنا: وطء رجل لامرأة لا تحل له بغير شبهة شرعية، وهو حرام ومن الكبائر. الزاني نوعان: محصن (بالغ عاقل متزوج) حده الرجم، وغير محصن حده مائة جلدة متوالية وتغريب عام. التعزير مشروع في كل معصية لا حد فيها ولا كفارة.",
+    points:[
+      "الزنا: وطء بغير شبهة شرعية، حرام ومن الكبائر",
+      "الزاني المحصن: حده الرجم",
+      "الزاني غير المحصن: مائة جلدة وتغريب عام",
+      "التعزير في كل معصية لا حد فيها ولا كفارة",
+      "حكمة التحريم: صيانة الأعراض والأنساب"
+    ],
+    questions:[
+      {t:"mcq",q:"الزنا هو:",o:["وطء رجل لامرأة لا تحل له بغير شبهة شرعية","العلاقة بالزوجة","الزواج","الخطبة"],a:0},
+      {t:"tf",q:"الزنا حرام ومن الكبائر.",a:true},
+      {t:"tf",q:"أحل الزنا في بعض الشرائع.",a:false},
+      {t:"mcq",q:"أنواع الزاني:",o:["محصن فقط","غير محصن فقط","محصن وغير محصن","ثلاثة أنواع"],a:2},
+      {t:"mcq",q:"الزاني المحصن هو:",o:["البالغ العاقل المتزوج","غير المتزوج","الصغير","المجنون"],a:0},
+      {t:"mcq",q:"حد الزاني المحصن:",o:["مائة جلدة","الرجم","تغريب","تعزير"],a:1},
+      {t:"mcq",q:"حد الزاني غير المحصن:",o:["مائة جلدة متوالية وتغريب عام","الرجم","خمسون جلدة","تعزير"],a:0},
+      {t:"mcq",q:"التغريب هو:",o:["السجن","النفي من بلد الزنا","الجلد","الغرامة"],a:1},
+      {t:"tf",q:"التعزير مشروع في كل معصية لا حد فيها ولا كفارة.",a:true},
+      {t:"mcq",q:"من أمثلة التعزير:",o:["الزنا","السرقة","سرقة ما لا قطع فيه","القذف"],a:2},
+      {t:"fill",q:"حد الزاني المحصن ............",a:"الرجم"},
+      {t:"fill",q:"حد الزاني غير المحصن مائة ............ وتغريب ............",a:"جلدة عام"},
+      {t:"def",q:"عرّف الزنا.",a:"هو وطء رجل لامرأة لا تحل له بغير شبهة شرعية."},
+      {t:"why",q:"علل: حُرّم الزنا.",a:"لأنه جناية على الأعراض والأنساب."},
+      {t:"sit",q:"ما الحكم: زنى رجل متزوج؟",a:"يجب عليه حد المحصن وهو الرجم."},
+      {t:"compare",q:"قارن بين الزاني المحصن وغير المحصن في الحد.",a:"المحصن حده الرجم، وغير المحصن حده مائة جلدة متوالية وتغريب عام."},
+      {t:"mcq",q:"التعزير مقداره:",o:["محدد بمائة جلدة","محدد بثمانين جلدة","غير مقدر يراه الإمام","محدد بأربعين جلدة"],a:2},
+      {t:"tf",q:"من أمثلة التعزير شهادة الزور.",a:true},
+      {t:"mcq",q:"التغريب في حق غير المحصن يكون:",o:["إلى الإمام","برأي الإمام إلى بلد من بلد الزنا","إلى بلد قريب","لا تغريب"],a:1}
+    ]
+  },
+  {
+    id:9, title:"حد القذف", icon:"🔇",
+    summary:"القذف شرعاً: الرمي بالزنا على جهة التعيير. حكمه: حرام ومن الكبائر، يجب فيه الحد. عقوبة القاذف: إقامة الحد وعدم قبول شهادته والفسق. مقدار الحد: 80 جلدة للحر. شروط القاذف: البلوغ، العقل، ألا يكون أصلاً للمقذوف، الاختيار، ألا يكون مأذوناً. شروط المقذوف: الإسلام/الذمة، البلوغ، العقل، العفة. مسقطات الحد: البينة، العفو، اللعان، الإقرار، إرث الحد.",
+    points:[
+      "القذف: الرمي بالزنا على جهة التعيير",
+      "حكمه: حرام من الكبائر",
+      "مقدار الحد: 80 جلدة للحر",
+      "عقوبة القاذف: الحد + رد الشهادة + الفسق",
+      "شروط القاذف: البلوغ، العقل، ألا يكون أصلاً، الاختيار، عدم الإذن",
+      "شروط المقذوف: الإسلام، البلوغ، العقل، العفة",
+      "مسقطات الحد: البينة، العفو، اللعان، الإقرار، الإرث"
+    ],
+    questions:[
+      {t:"mcq",q:"القذف لغةً:",o:["الرمي مطلقاً","السب","الشتم","اللعن"],a:0},
+      {t:"mcq",q:"القذف شرعاً:",o:["الرمي بالزنا على جهة التعيير","السب","اللعن","الشتم"],a:0},
+      {t:"tf",q:"القذف من الكبائر.",a:true},
+      {t:"mcq",q:"مقدار حد القذف للحر:",o:["مائة جلدة","ثمانون جلدة","أربعون جلدة","ستون جلدة"],a:1},
+      {t:"mcq",q:"عقوبة القاذف:",o:["إقامة الحد فقط","إقامة الحد وعدم قبول شهادته والفسق","السجن","الغرامة"],a:1},
+      {t:"mcq",q:"عدد شروط القاذف:",o:["ثلاثة","أربعة","خمسة","ستة"],a:2},
+      {t:"tf",q:"من شروط القاذف البلوغ.",a:true},
+      {t:"tf",q:"من شروط القاذف العقل.",a:true},
+      {t:"tf",q:"من شروط القاذف أن لا يكون أصلاً للمقذوف.",a:true},
+      {t:"tf",q:"من شروط القاذف الاختيار.",a:true},
+      {t:"tf",q:"من شروط القاذف أن لا يكون مأذوناً له في القذف.",a:true},
+      {t:"mcq",q:"إذا قذف الأب ولده:",o:["يقام عليه الحد","لا حد عليه","يعزر","يغرم"],a:1},
+      {t:"mcq",q:"عدد شروط المقذوف:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"من شروط المقذوف العفة.",a:true},
+      {t:"mcq",q:"عدد الشهود في البينة على الزنا:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"mcq",q:"عدد مسقطات حد القذف:",o:["ثلاثة","أربعة","خمسة","ستة"],a:2},
+      {t:"tf",q:"من مسقطات حد القذف إقامة البينة.",a:true},
+      {t:"tf",q:"من مسقطات حد القذف العفو.",a:true},
+      {t:"tf",q:"من مسقطات حد القذف اللعان.",a:true},
+      {t:"tf",q:"من مسقطات حد القذف إقرار المقذوف بالزنا.",a:true},
+      {t:"tf",q:"من مسقطات حد القذف إرث القاذف للحد.",a:true},
+      {t:"fill",q:"مقدار حد القذف ............ جلدة.",a:"ثمانون"},
+      {t:"fill",q:"البينة في القذف ............ شهود.",a:"أربعة"},
+      {t:"def",q:"عرّف القذف شرعاً.",a:"الرمي بالزنا على جهة التعيير."},
+      {t:"why",q:"علل: حُرّم القذف.",a:"صيانة للأعراض من أي اعتداء يقع عليها."},
+      {t:"sit",q:"ما الحكم: قذف صبي بالغاً؟",a:"لا يحد الصبي بل يعزر على ذلك، لأن البلوغ شرط في القاذف."},
+      {t:"sit",q:"ما الحكم: أذن المقذوف لشخص في قذفه؟",a:"لا حد على المأذون، لأن من شروط القاذف ألا يكون مأذوناً له في القذف."},
+      {t:"compare",q:"قارن بين القاذف والمقذوف في الشروط.",a:"القاذف يشترط فيه: البلوغ، العقل، ألا يكون أصلاً، الاختيار، عدم الإذن. والمقذوف يشترط فيه: الإسلام، البلوغ، العقل، العفة."},
+      {t:"mcq",q:"اللعان هو:",o:["أن يشهد الرجل أربع شهادات أمام القاضي متهماً زوجته بالزنا","السب","اللعن","الطلاق"],a:0},
+      {t:"tf",q:"إذا قذف مجنون بالغاً لا يحد.",a:true},
+      {t:"mcq",q:"إذا قذف مكره:",o:["يحد","لا يحد","يعزر","يغرم"],a:1}
+    ]
+  },
+  {
+    id:10, title:"حد شارب المسكر", icon:"🍷",
+    summary:"شرب المسكرات حرام ومن الكبائر، والخمر أم الخبائث. حده: 40 جلدة للشارب، والزيادة على الأربعين على وجه التعزير. يثبت الحد بأمرين: البينة (رجلان) أو الإقرار. لا يحد بشهادة رجل وامرأتين أو امرأتين، ولا بعلم القاضي ولا بعلم غيره، ولا بالقيء أو شم رائحة الخمر لاحتمال الإكراه.",
+    points:[
+      "شرب المسكرات حرام من الكبائر",
+      "الخمر أم الخبائث",
+      "حده: 40 جلدة، والزيادة تعزير",
+      "يثبت بـ: البينة (رجلان) أو الإقرار",
+      "لا يحد بعلم القاضي ولا بالقيء ولا بشم الرائحة",
+      "حكمة التحريم: وقوع العداوة والصد عن ذكر الله"
+    ],
+    questions:[
+      {t:"tf",q:"شرب المسكرات حرام ومن الكبائر.",a:true},
+      {t:"tf",q:"الخمر أم الخبائث.",a:true},
+      {t:"mcq",q:"مقدار حد شارب المسكر:",o:["مائة جلدة","ثمانون جلدة","أربعون جلدة","ستون جلدة"],a:2},
+      {t:"tf",q:"الزيادة على الأربعين على وجه التعزير.",a:true},
+      {t:"mcq",q:"يثبت حد الشرب بـ:",o:["البينة أو الإقرار","علم القاضي","شم الرائحة","القيء"],a:0},
+      {t:"mcq",q:"البينة في حد الشرب:",o:["رجلان","رجل وامرأتان","أربع نسوة","امرأة"],a:0},
+      {t:"tf",q:"يحد شارب المسكر بشهادة رجل وامرأتين.",a:false},
+      {t:"tf",q:"يحد شارب المسكر بعلم القاضي.",a:false},
+      {t:"tf",q:"يحد شارب المسكر بالقيء.",a:false},
+      {t:"tf",q:"يحد شارب المسكر بشم رائحة الخمر من فمه.",a:false},
+      {t:"mcq",q:"لا يحد بالقيء أو شم الرائحة لاحتمال:",o:["الخطأ","النسيان","الإكراه","الجهل"],a:2},
+      {t:"mcq",q:"حكم شرب الخمر لضرورة:",o:["يجوز","حرام","يحد","مكروه"],a:0},
+      {t:"fill",q:"مقدار حد شارب المسكر ............ جلدة.",a:"أربعون"},
+      {t:"fill",q:"يحد شارب المسكر بـ ............ أو ............",a:"البينة الإقرار"},
+      {t:"why",q:"علل: حُرّمت المسكرات.",a:"لإيقاع العداوة والبغضاء بين المسلمين، والصد عن ذكر الله وعن الصلاة، ولخطورتها الصحية."},
+      {t:"why",q:"علل: لا يحد شارب المسكر بالقيء.",a:"لاحتمال الإكراه، والحدود تُدرأ بالشبهات."},
+      {t:"sit",q:"ما الحكم: شرب خمراً لضرورة؟",a:"يجوز للضرورة، ولا حد عليه."},
+      {t:"sit",q:"ما الحكم: رأى القاضي رجلاً يشرب خمراً؟",a:"لا يحد بمجرد رؤية القاضي، لأن الحد لا يثبت بعلم القاضي."},
+      {t:"sit",q:"ما الحكم: أقر عند القاضي أنه شرب مسكراً؟",a:"يقام عليه الحد، لأن الإقرار يثبت به الحد."},
+      {t:"mcq",q:"الحدود تُدرأ بـ:",o:["الشبهات","الضرورة","الإقرار","البينة"],a:0},
+      {t:"tf",q:"من شرب خمراً ناسياً أو مكرهاً لا يحد.",a:true},
+      {t:"mcq",q:"يحد شارب المسكر إذا كان:",o:["مكلفاً عالماً بالتحريم مختاراً","صغيراً","مجنوناً","مكرهاً"],a:0},
+      {t:"tf",q:"يحل ذبح المجنون والسكران في الأظهر.",a:true}
+    ]
+  },
+  {
+    id:11, title:"حد السرقة", icon:"🗡️",
+    summary:"السرقة شرعاً: أخذ المال خفية ظلماً من حرز مثله. حكمها: حرام. حدها: قطع اليد. شروط السارق: البلوغ، العقل، الاختيار، العلم بالتحريم، عدم إذن المالك، الالتزام بالأحكام. شروط المسروق: النصاب (ربع دينار)، أن يكون من حرز مثله، ألا يكون للسارق ملك فيه، ألا يكون له شبهة. يثبت الحد بالإقرار أو البينة. أسقط عمر حد القطع في عام المجاعة.",
+    points:[
+      "السرقة: أخذ المال خفية ظلماً من حرز مثله",
+      "حدها: قطع اليد",
+      "النصاب: ربع دينار",
+      "شروط السارق: البلوغ، العقل، الاختيار، العلم، عدم الإذن، الالتزام",
+      "شروط المسروق: النصاب، الحرز، عدم الملك، عدم الشبهة",
+      "أسقط عمر القطع في عام المجاعة"
+    ],
+    questions:[
+      {t:"mcq",q:"السرقة لغةً:",o:["أخذ المال","أخذ المال خفية","السطو","النهب"],a:1},
+      {t:"mcq",q:"السرقة شرعاً:",o:["أخذ المال","أخذ المال خفية ظلماً من حرز مثله","السطو","النهب"],a:1},
+      {t:"tf",q:"السرقة حرام.",a:true},
+      {t:"mcq",q:"حد السرقة:",o:["السجن","قطع اليد","الغرامة","الجلد"],a:1},
+      {t:"mcq",q:"عدد شروط السارق:",o:["أربعة","خمسة","ستة","سبعة"],a:2},
+      {t:"tf",q:"من شروط السارق البلوغ.",a:true},
+      {t:"tf",q:"من شروط السارق العقل.",a:true},
+      {t:"tf",q:"من شروط السارق الاختيار.",a:true},
+      {t:"tf",q:"من شروط السارق العلم بالتحريم.",a:true},
+      {t:"tf",q:"من شروط السارق ألا يأذن له المالك.",a:true},
+      {t:"tf",q:"من شروط السارق الالتزام بالأحكام.",a:true},
+      {t:"mcq",q:"النصاب في السرقة:",o:["نصف دينار","ربع دينار خالص","دينار","ثلاثة دنانير"],a:1},
+      {t:"mcq",q:"الحرز هو:",o:["البيت","ما يحفظ فيه الشيء غالباً في العرف","المسجد","السوق"],a:1},
+      {t:"tf",q:"لا يقطع بسرقة مال له فيه ملك.",a:true},
+      {t:"tf",q:"لا قطع بسرقة مال أصل أو فرع.",a:true},
+      {t:"mcq",q:"يثبت حد السرقة بـ:",o:["الإقرار أو البينة","علم القاضي","القيافة","القرائن"],a:0},
+      {t:"tf",q:"يشترط تكرار الإقرار في حد السرقة.",a:false},
+      {t:"mcq",q:"البينة في حد السرقة:",o:["رجلان","رجل وامرأتان","أربع نسوة","امرأة"],a:0},
+      {t:"tf",q:"إذا شهد بالسرقة رجل وامرأتان ثبت المال ولا قطع.",a:true},
+      {t:"tf",q:"يجب رد ما أخذه السارق.",a:true},
+      {t:"tf",q:"إذا تلف المسروق ضمنه السارق ببدله.",a:true},
+      {t:"tf",q:"أسقط عمر حد القطع في عام المجاعة.",a:true},
+      {t:"fill",q:"حد السرقة ............ اليد.",a:"قطع"},
+      {t:"fill",q:"النصاب في السرقة ............ دينار خالص.",a:"ربع"},
+      {t:"def",q:"عرّف السرقة شرعاً.",a:"أخذ المال خفية ظلماً من حرز مثله."},
+      {t:"why",q:"علل: حُرّمت السرقة.",a:"للمحافظة على المال العام والخاص."},
+      {t:"why",q:"علل: أسقط عمر القطع في عام المجاعة.",a:"لأن الضرورة شبهة في سقوط القطع كما كانت شبهة في استباحة الأخذ."},
+      {t:"sit",q:"ما الحكم: سرق قماشاً لا تساوي قيمته ربع دينار؟",a:"لا تقطع يده لعدم النصاب."},
+      {t:"sit",q:"ما الحكم: سرق مال أمه؟",a:"لا قطع لوجود الشبهة، فلا قطع بسرقة مال أصل."},
+      {t:"sit",q:"ما الحكم: سرق ماله الذي بيد غيره؟",a:"لا قطع، لأن من شروط المسروق ألا يكون للسارق ملك فيه."},
+      {t:"compare",q:"قارن بين شروط السارق وشروط المسروق.",a:"السارق: البلوغ، العقل، الاختيار، العلم، عدم الإذن، الالتزام. المسروق: النصاب، الحرز، عدم الملك، عدم الشبهة."},
+      {t:"tf",q:"إذا سرق سيارة من أمام البيت تقطع يده.",a:false},
+      {t:"mcq",q:"من قطع يده في السرقة:",o:["اليد اليمنى","اليد اليسرى","كلتا اليدين","لا يقطع"],a:0}
+    ]
+  },
+  {
+    id:12, title:"حد قاطع الطريق والبغاة", icon:"🛡️",
+    summary:"قطع الطريق: الخروج لأخذ مال أو قتل أو إرعاب اعتماداً على القوة مع البعد عن الغوث. شروطه: التكليف، الشوكة، الاختيار. أنواعه أربعة: قتل فقط (يقتل)، قتل وأخذ مال (يقتل ويصلب)، أخذ مال فقط (تقطع يده ورجله من خلاف)، إخافة فقط (يحبس ويعزر). من تاب قبل القدرة سقط عنه الحد. البغاة: فرقة مسلمون خرجوا عن طاعة الإمام العادل، يقاتلون بثلاثة شروط.",
+    points:[
+      "قطع الطريق: الخروج لأخذ مال أو قتل أو إرعاب",
+      "شروطه: التكليف، الشوكة، الاختيار",
+      "أنواعه أربعة بحسب الفعل",
+      "التوبة قبل القدرة تسقط الحد",
+      "البغاة: فرقة مسلمون خرجوا عن طاعة الإمام",
+      "شروط قتال البغاة: المنعة، الخروج عن قبضة الإمام، التأويل السائغ"
+    ],
+    questions:[
+      {t:"mcq",q:"قطع الطريق هو:",o:["الخروج لأخذ مال أو قتل أو إرعاب","السرقة","السطو","النهب"],a:0},
+      {t:"mcq",q:"عدد شروط قاطع الطريق:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"tf",q:"من شروط قاطع الطريق التكليف.",a:true},
+      {t:"tf",q:"من شروط قاطع الطريق الشوكة.",a:true},
+      {t:"tf",q:"من شروط قاطع الطريق الاختيار.",a:true},
+      {t:"mcq",q:"عدد أنواع قطع الطريق:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"mcq",q:"إذا قتل قاطع الطريق عمداً ولم يأخذ المال:",o:["يقتل","يقتل ويصلب","تقطع يده","يحبس"],a:0},
+      {t:"mcq",q:"إذا قتل وأخذ المال:",o:["يقتل فقط","يقتل ويصلب","تقطع يده","يحبس"],a:1},
+      {t:"mcq",q:"إذا أخذ المال فقط:",o:["يقتل","تقطع يده ورجله من خلاف","يحبس","يصلب"],a:1},
+      {t:"mcq",q:"إذا أخاف فقط:",o:["يقتل","يحبس ويعزر","تقطع يده","يصلب"],a:1},
+      {t:"tf",q:"من تاب من قاطع الطريق قبل القدرة سقط عنه الحد.",a:true},
+      {t:"tf",q:"التوبة تسقط الحدود غير حد قاطع الطريق قبل القدرة.",a:false},
+      {t:"mcq",q:"البغاة هم:",o:["فرقة مسلمون خرجوا عن طاعة الإمام العادل","الكفار","المنافقون","المرتدون"],a:0},
+      {t:"mcq",q:"عدد شروط قتال البغاة:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"tf",q:"من شروط قتال البغاة المنعة (الشوكة).",a:true},
+      {t:"tf",q:"من شروط قتال البغاة الخروج عن قبضة الإمام.",a:true},
+      {t:"tf",q:"من شروط قتال البغاة التأويل السائغ.",a:true},
+      {t:"mcq",q:"يجب على الإمام نحو البغاة أن:",o:["يقاتلهم فوراً","يبعث إليهم رسولاً عدلاً","يسجنهم","يقتلهم"],a:1},
+      {t:"fill",q:"قطع الطريق الخروج لأخذ مال أو ............ أو ............",a:"قتل إرعاب"},
+      {t:"fill",q:"من تاب من قاطع الطريق قبل ............ سقط عنه الحد.",a:"القدرة"},
+      {t:"def",q:"عرّف قطع الطريق.",a:"هو الخروج لأخذ مال أو قتل أو إرعاب، اعتماداً على القوة مع البعد عن الغوث."},
+      {t:"def",q:"من هم البغاة؟",a:"فرقة مسلمون مخالفون للإمام العادل؛ بأن خرجوا عن طاعته بعد انقيادهم له، أو منعوا حق توجه إليهم كزكاة."},
+      {t:"why",q:"علل: شرع حد قاطع الطريق.",a:"لتأمين الطريق على الناس في حياتهم وأموالهم وأنفسهم."},
+      {t:"sit",q:"ما الحكم: قطع الطريق صبي؟",a:"لا يعتبر قاطع طريق، لأن التكليف شرط في قاطع الطريق."},
+      {t:"sit",q:"ما الحكم: تاب قاطع الطريق بعد قدرة الإمام عليه؟",a:"لا تسقط عنه الحدود، لأن التوبة تسقط الحدود قبل القدرة فقط."},
+      {t:"compare",q:"قارن بين التوبة قبل القدرة وبعدها في حد قاطع الطريق.",a:"قبل القدرة: تسقط الحد. بعد القدرة: لا تسقط الحد، وهذا خاص بقاطع الطريق."},
+      {t:"mcq",q:"تقطع اليد والرجل من خلاف يعني:",o:["اليمنى واليمنى","اليمنى واليسرى","اليسرى واليمنى","اليسرى واليسرى"],a:1},
+      {t:"tf",q:"يجب على الإمام أن يسوي بين الخصمين.",a:true}
+    ]
+  },
+  {
+    id:13, title:"تارك الصلاة", icon:"🕌",
+    summary:"الصلاة ركن من أركان الإسلام، منزلتها من الإيمان بمنزلة الرأس من الجسد. تاركها ضربان: جاحد لوجوبها (كافر يجب استتابته)، تارك لها كسلاً معتقداً لوجوبها (عاص يفسق على الأصح). من تركها بعذر كنوم أو نسيان سن له المبادرة بها. ومن تركها بلا عذر لزمه قضاؤها فوراً.",
+    points:[
+      "الصلاة ركن من أركان الإسلام",
+      "منزلتها من الإيمان كالرأس من الجسد",
+      "تاركها ضربان: جاحد (كافر)، تارك كسلاً (عاصٍ يفسق)",
+      "من تركها بعذر سن له المبادرة بها",
+      "من تركها بلا عذر لزمه قضاؤها فوراً"
+    ],
+    questions:[
+      {t:"tf",q:"الصلاة ركن من أركان الإسلام.",a:true},
+      {t:"tf",q:"منزلة الصلاة من الإيمان بمنزلة الرأس من الجسد.",a:true},
+      {t:"mcq",q:"أنواع تارك الصلاة:",o:["ضرب واحد","ضربان","ثلاثة","أربعة"],a:1},
+      {t:"mcq",q:"تارك الصلاة جاحداً لوجوبها:",o:["عاص","كافر","فاسق","مذنب"],a:1},
+      {t:"mcq",q:"تارك الصلاة كسلاً معتقداً لوجوبها:",o:["كافر","عاصٍ يفسق على الأصح","فاسق","لا شيء عليه"],a:1},
+      {t:"tf",q:"يجب استتابة الجاحد لوجوب الصلاة.",a:true},
+      {t:"mcq",q:"من ترك الصلاة بعذر كنوم أو نسيان:",o:["يأثم","يسن له المبادرة بها","يحرم","يقضيها فقط"],a:1},
+      {t:"mcq",q:"من ترك الصلاة بلا عذر:",o:["لا شيء عليه","يلزمه قضاؤها فوراً","يصليها متى شاء","لا قضاء عليه"],a:1},
+      {t:"fill",q:"منزلة الصلاة من الإيمان بمنزلة ............ من الجسد.",a:"الرأس"},
+      {t:"fill",q:"تارك الصلاة جاحداً لوجوبها حكمه ............",a:"الكفر"},
+      {t:"why",q:"علل: تارك الصلاة جاحداً لوجوبها كافر.",a:"لأنه مكذب لله ورسوله، ولأن وجوبها معلوم من الدين بالضرورة."},
+      {t:"sit",q:"ما الحكم: ترك الصلاة نائماً؟",a:"يسن له المبادرة بها إذا ذكرها، لقوله ﷺ: من نام عن صلاة أو نسيها فليصلها إذا ذكرها."},
+      {t:"compare",q:"قارن بين تارك الصلاة جاحداً وتاركها كسلاً.",a:"الجاحد كافر يجب استتابته. والتارك كسلاً عاصٍ يفسق على الأصح ويجب استتابته أيضاً."},
+      {t:"tf",q:"من ترك الصلاة بلا عذر لزمه قضاؤها فوراً لتقصيره.",a:true},
+      {t:"mcq",q:"حديث (من نام عن صلاة أو نسيها فليصلها إذا ذكرها) يدل على:",o:["القضاء فوراً","المبادرة بها عند الذكر","الإثم","الحرمة"],a:1}
+    ]
+  },
+  {
+    id:14, title:"الصيد والذبائح والأطعمة", icon:"🍖",
+    summary:"الذكاة شرعاً: إبطال الحرارة الغريزية على وجه مخصوص. كمالها أربعة: قطع الحلقوم والمريء والودجين. المجزئ: قطع الحلقوم والمريء. تجوز بكل محدَّد يجرح إلا السن والظفر. تحل ذكاة المسلم والكتابي، ولا تحل ذبيحة مجوسي. الجنين يذكى بذكاة أمه. ضابط الحلال: ما استطابته العرب، والحرام: ما استخبثته العرب.",
+    points:[
+      "الذكاة: إبطال الحرارة الغريزية على وجه مخصوص",
+      "كمالها: قطع الحلقوم والمريء والودجين",
+      "المجزئ: قطع الحلقوم والمريء",
+      "تجوز بكل محدَّد يجرح إلا السن والظفر",
+      "تحل ذكاة المسلم والكتابي",
+      "لا تحل ذبيحة مجوسي أو وثني",
+      "الجنين يذكى بذكاة أمه",
+      "ما قُطع من حيوان حي كميتته طهارة ونجاسة"
+    ],
+    questions:[
+      {t:"mcq",q:"الذكاة لغةً:",o:["التطييب","الذبح","القطع","الطهارة"],a:0},
+      {t:"mcq",q:"الذكاة شرعاً:",o:["الذبح","إبطال الحرارة الغريزية على وجه مخصوص","القطع","الطهارة"],a:1},
+      {t:"mcq",q:"عدد كمال الذكاة:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"من كمال الذكاة قطع الحلقوم.",a:true},
+      {t:"tf",q:"من كمال الذكاة قطع المريء.",a:true},
+      {t:"tf",q:"من كمال الذكاة قطع الودجين.",a:true},
+      {t:"mcq",q:"المجزئ في الذكاة:",o:["قطع الحلقوم فقط","قطع المريء فقط","قطع الحلقوم والمريء","قطع الودجين فقط"],a:2},
+      {t:"mcq",q:"تجوز الذكاة بـ:",o:["كل محدَّد يجرح","السن والظفر","العظم","الخشب غير المحدّد"],a:0},
+      {t:"tf",q:"لا تجوز الذكاة بالسن والظفر.",a:true},
+      {t:"mcq",q:"تحل ذكاة:",o:["المسلم فقط","المسلم والكتابي","المجوسي","الوثني"],a:1},
+      {t:"tf",q:"لا تحل ذبيحة المجوسي.",a:true},
+      {t:"tf",q:"لا تحل ذبيحة الوثني.",a:true},
+      {t:"tf",q:"يحل ذبح المجنون والسكران في الأظهر.",a:true},
+      {t:"tf",q:"ذكاة الجنين حاصلة بذكاة أمه.",a:true},
+      {t:"mcq",q:"إذا وجد الجنين حياً حياة مستقرة:",o:["لا يحتاج لتذكية","يذبح حينئذ","يؤكل دون ذبح","لا يؤكل"],a:1},
+      {t:"tf",q:"ما قُطع من حيوان حي هو كميتته طهارة ونجاسة.",a:true},
+      {t:"mcq",q:"ضابط الحلال من الأطعمة:",o:["ما استطابته العرب","ما استخبثته العرب","ما حرمه الشرع","ما شاع عند الناس"],a:0},
+      {t:"mcq",q:"ضابط الحرام من الأطعمة:",o:["ما استطابته العرب","ما استخبثته العرب","ما أباحه الشرع","ما شاع عند الناس"],a:1},
+      {t:"tf",q:"يحل أكل الحيوان البحري المأكول بلا ذبح.",a:true},
+      {t:"mcq",q:"الميتتان المستثناة من الميتة:",o:["السمك والجراد","الحمار","الخنزير","الكلب"],a:0},
+      {t:"mcq",q:"الدمان المستثناة من الدم:",o:["دم الحيض","دم الكبد والطحال","دم القتل","دم الجرح"],a:1},
+      {t:"fill",q:"كمال الذكاة قطع ............ و ............ و ............",a:"الحلقوم المريء الودجين"},
+      {t:"fill",q:"الميتتان المستثناة ............ و ............",a:"السمك الجراد"},
+      {t:"def",q:"عرّف الذكاة شرعاً.",a:"إبطال الحرارة الغريزية على وجه مخصوص."},
+      {t:"why",q:"علل: لا تجوز الذكاة بالسن والظفر.",a:"لقوله ﷺ: ما أنهر الدم وذكر اسم الله عليه فكل، ما خلا السن والظفر."},
+      {t:"sit",q:"ما الحكم: ذبح بسكين حادة؟",a:"تجوز الذكاة، لأنها بكل محدَّد يجرح."},
+      {t:"sit",q:"ما الحكم: ذبح بالسن؟",a:"لا تجوز الذكاة، لنهي النبي ﷺ عن ذلك."},
+      {t:"sit",q:"ما الحكم: ذبيحة مجوسي؟",a:"لا تحل، لأنه لا كتاب له."},
+      {t:"compare",q:"قارن بين الحيوان البري والبحري في الذكاة.",a:"البري المأكول يجب ذبحه، والبحري يحل على الصحيح بلا ذبح."},
+      {t:"mcq",q:"ذكاة الحيوان الشارد:",o:["ذبحه","عقره","تركه","صيده"],a:1},
+      {t:"tf",q:"الحيوان على ثلاثة أقسام: ما لا يؤكل، ما يؤكل ولا يحل إلا بالتذكية، ما تحل ميتته.",a:true}
+    ]
+  },
+  {
+    id:15, title:"الأضحية", icon:"🐏",
+    summary:"الأضحية: ما يذبح من النعم يوم عيد النحر وأيام التشريق تقرباً لله. حكمها: سنة مؤككة على الكفاية. يجزئ: الجذع من الضأن (سنة)، الثني من المعز (سنتان)، الثني من الإبل (5 سنين)، الثني من البقر (سنتان). البدنة والبقرة عن سبعة. الوقت: من بعد طلوع الشمس يوم النحر إلى غروب آخر أيام التشريق. لا يجزئ المعيبة.",
+    points:[
+      "الأضحية: ما يذبح من النعم يوم النحر وأيام التشريق",
+      "حكمها: سنة مؤككة على الكفاية",
+      "الجذع من الضأن: سنة",
+      "الثني من المعز: سنتان",
+      "الثني من الإبل: 5 سنين",
+      "الثني من البقر: سنتان",
+      "البدنة والبقرة عن سبعة",
+      "لا يجزئ المعيبة بعيب ينقص اللحم"
+    ],
+    questions:[
+      {t:"mcq",q:"الأضحية هي:",o:["ما يذبح من النعم يوم عيد النحر وأيام التشريق","الذبيحة العادية","العقيقة","النذر"],a:0},
+      {t:"mcq",q:"حكم الأضحية:",o:["فرض","سنة مؤككة على الكفاية","مستحبة","واجبة"],a:1},
+      {t:"tf",q:"لا تجب الأضحية إلا بالنذر.",a:true},
+      {t:"mcq",q:"الجذع من الضأن هو ما له:",o:["سنة وطعن في الثانية","سنتان","ثلاث سنين","ستة أشهر"],a:0},
+      {t:"mcq",q:"الثني من المعز هو ما له:",o:["سنة","سنتان وطعن في الثالثة","ثلاث سنين","ستة أشهر"],a:1},
+      {t:"mcq",q:"الثني من الإبل هو ما له:",o:["سنتان","خمس سنين وطعن في السادسة","ثلاث سنين","سنة"],a:1},
+      {t:"mcq",q:"الثني من البقر هو ما له:",o:["سنتان وطعن في الثالثة","سنة","ثلاث سنين","خمس سنين"],a:0},
+      {t:"mcq",q:"تجزئ البدنة (الجمل) عن:",o:["شخص واحد","ثلاثة","خمسة","سبعة"],a:3},
+      {t:"mcq",q:"تجزئ البقرة عن:",o:["واحد","ثلاثة","خمسة","سبعة"],a:3},
+      {t:"mcq",q:"تجزئ الشاة عن:",o:["شخص واحد","ثلاثة","خمسة","سبعة"],a:0},
+      {t:"tf",q:"لا يجزئ في الأضحية المعيبة بعيب ينقص اللحم.",a:true},
+      {t:"mcq",q:"من العيوب التي تمنع الإجزاء:",o:["العوراء البين عورها","صغر الحجم","اللون","الجنس"],a:0},
+      {t:"mcq",q:"من العيوب التي تمنع الإجزاء:",o:["العرجاء البين ضلعها","صغر الحجم","اللون","الجنس"],a:0},
+      {t:"mcq",q:"من العيوب التي تمنع الإجزاء:",o:["المريضة البين مرضها","صغر الحجم","اللون","الجنس"],a:0},
+      {t:"mcq",q:"من العيوب التي تمنع الإجزاء:",o:["العجفاء التي ذهب مخها من الهزال","صغر الحجم","اللون","الجنس"],a:0},
+      {t:"tf",q:"يجزئ مقطوعة الأذن.",a:false},
+      {t:"tf",q:"يجزئ الخصي.",a:true},
+      {t:"tf",q:"تجزئ فاقدة القرون (الجلحاء).",a:true},
+      {t:"mcq",q:"وقت التضحية يدخل:",o:["من فجر يوم النحر","بعد طلوع الشمس يوم النحر ومقدار ركعتين وخطبتين","من ليلة العيد","قبل العيد"],a:1},
+      {t:"mcq",q:"ينتهي وقت التضحية:",o:["يوم العيد فقط","بغروب الشمس من آخر أيام التشريق","بعد أسبوع","بعد شهر"],a:1},
+      {t:"tf",q:"أيام التشريق ثلاثة (11، 12، 13).",a:true},
+      {t:"mcq",q:"من سنن الأضحية:",o:["التسمية","الصلاة على النبي ﷺ","استقبال القبلة","كل ما سبق"],a:3},
+      {t:"tf",q:"يحرم على المضحي بيع شيء من الأضحية.",a:true},
+      {t:"tf",q:"يحرم جعل الجلد أجراً للجزار.",a:true},
+      {t:"fill",q:"حكم الأضحية ............ مؤككة على الكفاية.",a:"سنة"},
+      {t:"fill",q:"تجزئ البدنة عن ............ أشخاص.",a:"سبعة"},
+      {t:"def",q:"عرّف الأضحية.",a:"هي اسم لما يذبح من النعم يوم عيد النحر وأيام التشريق الثلاثة تقرباً إلى الله تعالى."},
+      {t:"sit",q:"ما الحكم: ضحى بأضحية معيبة بعور بين؟",a:"لا يجزئ، لأن العيوب تمنع الإجزاء."},
+      {t:"sit",q:"ما الحكم: اشترك تسعة في بقرة؟",a:"لا يجزئ، لأن البقرة تجزئ عن سبعة فقط."},
+      {t:"compare",q:"قارن بين الأضحية المنذورة والمتطوع بها.",a:"المنذورة: لا يأكل منها المضحي شيئاً ويتصدق بجميعها. المتطوع بها: يأكل منها إلى الثلث."},
+      {t:"mcq",q:"أفضل الأضحية من حيث كثرة اللحم:",o:["الإبل","البقر","الغنم","الماعز"],a:0},
+      {t:"mcq",q:"أفضل الأضحية من حيث أطيبية اللحم:",o:["الإبل","البقر","الغنم","الماعز"],a:2}
+    ]
+  },
+  {
+    id:16, title:"العقيقة", icon:"🎉",
+    summary:"العقيقة شرعاً: الذبيحة للمولود يوم سابع ولادته. حكمها: سنة مؤككة. قدرها: شاتان عن الغلام وشاة عن الجارية. تتعدد بتعدد الأولاد. أحكامها كأحكام الأضحية، وتختلف في أن العقيقة تطبخ والأضحية توزع نيئة. يسن: الأذن في أذن المولود اليمنى، الإقامة في اليسرى، التحنيك، التسمية، وحلق رأسه.",
+    points:[
+      "العقيقة: الذبيحة للمولود يوم سابع ولادته",
+      "حكمها: سنة مؤككة",
+      "عن الغلام شاتان، وعن الجارية شاة",
+      "تتعدد بتعدد الأولاد",
+      "تطبخ (تختلف عن الأضحية)",
+      "يسن الأذن والإقامة والتحنيك والتسمية وحلق الرأس"
+    ],
+    questions:[
+      {t:"mcq",q:"العقيقة لغةً:",o:["اسم للشعر على رأس المولود","الذبيحة","الوليمة","الهدية"],a:0},
+      {t:"mcq",q:"العقيقة شرعاً:",o:["الذبيحة للمولود يوم سابع ولادته","الشعر","الوليمة","الهدية"],a:0},
+      {t:"mcq",q:"حكم العقيقة:",o:["فرض","سنة مؤككة","مستحبة","واجبة"],a:1},
+      {t:"mcq",q:"قدر العقيقة عن الغلام:",o:["شاة","شاتان","ثلاث شياه","أربع شياه"],a:1},
+      {t:"mcq",q:"قدر العقيقة عن الجارية:",o:["شاة","شاتان","ثلاث شياه","أربع شياه"],a:0},
+      {t:"tf",q:"تتعدد العقيقة بتعدد الأولاد.",a:true},
+      {t:"tf",q:"العقيقة سنة ولو مات المولود قبل السابع.",a:true},
+      {t:"tf",q:"أحكام العقيقة كأحكام الأضحية.",a:true},
+      {t:"tf",q:"العقيقة تطبخ والأضحية توزع نيئة.",a:true},
+      {t:"mcq",q:"من سنن المولود:",o:["الأذن في اليمنى","الإقامة في اليسرى","التحنيك","كل ما سبق"],a:3},
+      {t:"tf",q:"يسن التحنيك بتمر.",a:true},
+      {t:"tf",q:"يسن تسمية المولود.",a:true},
+      {t:"mcq",q:"معنى (الغلام مرتهن بعقيقته):",o:["لا يشفع في والديه يوم القيامة","محبوس","مرهون","لا ينمو"],a:0},
+      {t:"fill",q:"حكم العقيقة ............ مؤككة.",a:"سنة"},
+      {t:"fill",q:"العقيقة عن الغلام ............ شاتان.",a:"شاتان"},
+      {t:"def",q:"عرّف العقيقة شرعاً.",a:"الذبيحة للمولود يوم سابع ولادته بحساب يوم الولادة من السبع."},
+      {t:"why",q:"علل: العقيقة تطبخ.",a:"لأنها شُرعت فرحاً وسروراً بالمولود، فتطبخ ويُدعى إليها الفقراء والمساكين."},
+      {t:"sit",q:"ما الحكم: مات المولود قبل السابع؟",a:"سُنّت العقيقة، لأنها سنة ولو مات المولود قبل السابع."},
+      {t:"compare",q:"قارن بين العقيقة والأضحية.",a:"يتفقان في السن والسلامة من العيب والأكل، ويختلفان في أن العقيقة تطبخ والأضحية توزع نيئة."},
+      {t:"mcq",q:"التحنيك يكون بـ:",o:["تمر يفرم ويلين","ماء","حليب","عسل"],a:0},
+      {t:"tf",q:"يسن الأذن في أذن المولود اليمنى.",a:true},
+      {t:"mcq",q:"عقيقة الجارية:",o:["شاة","شاتان","ثلاث","أربع"],a:0}
+    ]
+  },
+  {
+    id:17, title:"الأيمان", icon:"✋",
+    summary:"اليمين شرعاً: تحقيق ما يحتمل المخالفة أو تأكيده بذكر اسم من أسمائه تعالى أو صفة من صفات ذاته. شروط الحالف: التكليف، الاختيار، النطق، القصد. اللغو: ما سبق لسانه من غير قصد. كفارة اليمين: مخيرة ابتداء مرتبة انتهاء (عتق رقبة أو إطعام عشرة مساكين أو كسوتهم، فإن لم يجد فصيام ثلاثة أيام).",
+    points:[
+      "اليمين: تحقيق أو تأكيد بذكر اسم الله أو صفته",
+      "شروط الحالف: التكليف، الاختيار، النطق، القصد",
+      "يمين اللغو: ما سبق لسانه بلا قصد",
+      "لا شيء في لغو اليمين",
+      "كفارة اليمين: مخيرة ابتداء مرتبة انتهاء",
+      "الخصال: عتق رقبة، إطعام عشرة، كسوتهم، صيام ثلاثة"
+    ],
+    questions:[
+      {t:"mcq",q:"اليمين لغةً:",o:["اليد اليمنى","الحلف","القسم","العهد"],a:0},
+      {t:"mcq",q:"اليمين شرعاً:",o:["اليد اليمنى","تحقيق ما يحتمل المخالفة أو تأكيده بذكر اسم الله أو صفته","الحلف بغير الله","القسم"],a:1},
+      {t:"mcq",q:"لا ينعقد اليمين إلا بـ:",o:["اسم من أسماء الله أو صفة من صفات ذاته","الكعبة","الآباء","النبي"],a:0},
+      {t:"tf",q:"لا ينعقد اليمين بالكعبة.",a:true},
+      {t:"mcq",q:"عدد شروط الحالف:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"من شروط الحالف التكليف.",a:true},
+      {t:"tf",q:"من شروط الحالف الاختيار.",a:true},
+      {t:"tf",q:"من شروط الحالف القصد.",a:true},
+      {t:"tf",q:"يمين الصبي لا تنعقد.",a:true},
+      {t:"mcq",q:"يمين اللغو هي:",o:["ما سبق لسانه من غير قصد","اليمين المتعمدة","اليمين بالله","اليمين بالكعبة"],a:0},
+      {t:"mcq",q:"حكم يمين اللغو:",o:["تجب فيه الكفارة","لا شيء فيه","يجب القضاء","توبة"],a:1},
+      {t:"mcq",q:"من حلف بصدقة ماله فله:",o:["الوفاء فقط","الالتزام بالنذر أو كفارة يمين في الأظهر","لا شيء","يجب"],a:1},
+      {t:"mcq",q:"كفارة اليمين:",o:["مرتبة مطلقاً","مخيرة ابتداء مرتبة انتهاء","مخيرة مطلقاً","مرتبة ابتداء"],a:1},
+      {t:"mcq",q:"من خصال كفارة اليمين:",o:["عتق رقبة","إطعام عشرة مساكين","كسوة عشرة","كل ما سبق"],a:3},
+      {t:"mcq",q:"إذا لم يجد خصال الكفارة الثلاث:",o:["يصلي","يصوم ثلاثة أيام","يتصدق","لا شيء"],a:1},
+      {t:"tf",q:"لا يجب تتابع الصيام في كفارة اليمين في الأظهر.",a:true},
+      {t:"mcq",q:"مقدار الإطعام لكل مسكين:",o:["مد","نصف مد","صاع","مدّين"],a:0},
+      {t:"tf",q:"يجوز إخراج الثوب الملبوس في الكفارة.",a:true},
+      {t:"mcq",q:"حلف ألا يفعل شيئاً ففعل غيره:",o:["حنث","لم يحنث","يجب الكفارة","مختلف"],a:1},
+      {t:"mcq",q:"حلف ألا يفعل شيئاً فأمر غيره بفعله:",o:["حنث","لم يحنث","يجب الكفارة","مختلف"],a:1},
+      {t:"mcq",q:"حلف ألا ينكح فوكل في النكاح:",o:["لم يحنث","حنث","مختلف","لا شيء"],a:1},
+      {t:"fill",q:"يمين اللغو ............ فيه.",a:"لا شيء"},
+      {t:"fill",q:"كفارة اليمين ............ ابتداء ............ انتهاء.",a:"مخيرة مرتبة"},
+      {t:"def",q:"عرّف اليمين شرعاً.",a:"تحقيق ما يحتمل المخالفة أو تأكيده بذكر اسم من أسمائه تعالى أو صفة من صفات ذاته."},
+      {t:"def",q:"ما يمين اللغو؟",a:"ما سبق لسانه إلى لفظ اليمين من غير أن يقصدها، كقوله: بلى والله، أو لا والله في حال غضبه ولم يقصد اليمين."},
+      {t:"why",q:"علل: كفارة اليمين مخيرة ابتداء مرتبة انتهاء.",a:"لأن له أن يكفّر بأي خصلة من الثلاث في الابتداء، فإن عجز عنها انتقل إلى الصيام."},
+      {t:"sit",q:"ما الحكم: حلف رجل لا يبيع سيارته فوُهبت له؟",a:"لا يحنث، لأنه لم يفعل المحلوف عليه."},
+      {t:"compare",q:"قارن بين كفارة اليمين وكفارة الظهار.",a:"كفارة اليمين مخيرة ابتداء مرتبة انتهاء، وكفارة الظهار مرتبة مطلقاً (عتق فصيام فإطعام)."},
+      {t:"tf",q:"لا يكفي في الكسوة خف ولا قفاز.",a:true},
+      {t:"mcq",q:"مد الطعام يساوي تقريباً:",o:["نصف كيلو","510 جرام","كيلو","كيلوين"],a:1}
+    ]
+  },
+  {
+    id:18, title:"النذور", icon:"🤲",
+    summary:"النذر شرعاً: التزام قربة لم تتعين بأصل الشرع. نوعان: نذر اللجاج (يخرج مخرج اليمين) وكفارته كفارة يمين، ونذر التبرر (قسمان: مطلق، ومعلق على شيء مرغوب). لا ينعقد النذر المعلق على معصية ولا نذر المعصية نفسها. لا ينعقد نذر المكروه كصوم الدهر. لا ينعقد نذر الواجب المعين. لا ينعقد النذر بترك مباح أو فعله.",
+    points:[
+      "النذر: التزام قربة لم تتعين بأصل الشرع",
+      "نوعان: لجاج، وتبرر",
+      "نذر اللجاج: كفارته كفارة يمين",
+      "نذر التبرر: قسمان (مطلق، ومعلق)",
+      "لا ينعقد نذر المعصية",
+      "لا ينعقد نذر المكروه كصوم الدهر",
+      "لا ينعقد نذر المباح"
+    ],
+    questions:[
+      {t:"mcq",q:"النذر لغةً:",o:["الوعد بخير أو شر","الإلزام","القربة","الصدقة"],a:0},
+      {t:"mcq",q:"النذر شرعاً:",o:["الوعد","التزام قربة لم تتعين بأصل الشرع","الصدقة","الإلزام"],a:1},
+      {t:"mcq",q:"أنواع النذر:",o:["نوع واحد","نوعان","ثلاثة","أربعة"],a:1},
+      {t:"mcq",q:"نذر اللجاج هو:",o:["التمادي في الخصومة","التبرر","الطاعة","الصدقة"],a:0},
+      {t:"mcq",q:"كفارة نذر اللجاج:",o:["كفارة ظهار","كفارة يمين","صيام","لا شيء"],a:1},
+      {t:"mcq",q:"نذر التبرر قسمان:",o:["مطلق ومعلق","كبير وصغير","قليل وكثير","سهل وصعب"],a:0},
+      {t:"mcq",q:"أفضل أنواع النذر:",o:["نذر اللجاج","النذر المطلق","النذر المعلق على معصية","نذر المعصية"],a:1},
+      {t:"tf",q:"لا ينعقد النذر المعلق على معصية.",a:true},
+      {t:"tf",q:"لا ينعقد نذر المعصية.",a:true},
+      {t:"tf",q:"لا ينعقد نذر صوم الدهر على الأصح.",a:true},
+      {t:"tf",q:"لا ينعقد نذر الواجب المعين كالصلوات الخمس.",a:true},
+      {t:"tf",q:"ينعقد نذر الواجب على الكفاية كصلاة الجنازة.",a:true},
+      {t:"tf",q:"لا ينعقد النذر بترك مباح أو فعله.",a:true},
+      {t:"mcq",q:"إذا خالف الناذر ونذر المباح:",o:["تلزمه كفارة يمين","لا شيء عليه","تلزمه توبة","يجب القضاء"],a:0},
+      {t:"fill",q:"النذر ............ قربة لم تتعين بأصل الشرع.",a:"التزام"},
+      {t:"fill",q:"أنواع النذر ............ و ............",a:"اللجاج التبرر"},
+      {t:"def",q:"عرّف النذر شرعاً.",a:"التزام قربة لم تتعين بأصل الشرع."},
+      {t:"why",q:"علل: لا ينعقد نذر المعصية.",a:"لأن النذر لا يكون إلا فيما يتقرب به إلى الله، والمعصية لا يتقرب بها."},
+      {t:"sit",q:"ما الحكم: نذر أن يصلي صلاة الجنازة؟",a:"ينعقد نذره ويجب عليه الوفاء به، لأنه واجب على الكفاية."},
+      {t:"sit",q:"ما الحكم: نذر أن يقتل فلاناً بغير حق؟",a:"لا ينعقد، لأنه نذر معصية، ولا يجوز له فعل ذلك."},
+      {t:"compare",q:"قارن بين نذر اللجاج ونذر التبرر.",a:"اللجاج: للتمادي في الخصومة وكفارته كفارة يمين. والتبرر: قربة لله وينعقد ويجب الوفاء به."},
+      {t:"mcq",q:"من نذر أن يطيع الله:",o:["يلزمه","يطعه","كفارة","لا شيء"],a:1},
+      {t:"mcq",q:"من نذر أن يعصي الله:",o:["يلزمه","لا يعصه","كفارة","يجب"],a:1}
+    ]
+  },
+  {
+    id:19, title:"القضاء وأحكامه", icon:"⚖️",
+    summary:"القضاء شرعاً: فصل الخصومة بين خصمين فأكثر بحكم الله تعالى. حكمه: فرض كفاية. شروط القاضي أحدى عشرة. يجب على القاضي التسوية بين الخصمين. يحرم عليه قبول الهدية ممن هو في محل ولايته. يكره القضاء عند الغضب الشديد. لا يجوز أن يسأل المدعى عليه إلا بعد فراغ المدعي من دعواه.",
+    points:[
+      "القضاء: فصل الخصومة بحكم الله",
+      "حكمه: فرض كفاية",
+      "شروط القاضي: 11 شرطاً",
+      "يجب التسوية بين الخصمين",
+      "يحرم قبول الهدية ممن في محل ولايته",
+      "يحرم القضاء عند الغضب الشديد"
+    ],
+    questions:[
+      {t:"mcq",q:"القضاء لغةً:",o:["إحكام الشيء وإمضاؤه","الفصل","الحكم","العدل"],a:0},
+      {t:"mcq",q:"القضاء شرعاً:",o:["فصل الخصومة بين خصمين فأكثر بحكم الله","الحكم","العدل","الإمضاء"],a:0},
+      {t:"mcq",q:"حكم تولي القضاء:",o:["فرض عين","فرض كفاية","سنة","مستحب"],a:1},
+      {t:"mcq",q:"عدد شروط القاضي:",o:["سبعة","تسعة","أحدى عشرة","ثلاثة عشر"],a:2},
+      {t:"tf",q:"من شروط القاضي الإسلام.",a:true},
+      {t:"tf",q:"من شروط القاضي البلوغ.",a:true},
+      {t:"tf",q:"من شروط القاضي العقل.",a:true},
+      {t:"tf",q:"من شروط القاضي العدالة.",a:true},
+      {t:"tf",q:"من شروط القاضي معرفة أحكام الكتاب والسنة.",a:true},
+      {t:"tf",q:"من شروط القاضي معرفة الإجماع.",a:true},
+      {t:"tf",q:"من شروط القاضي معرفة الاختلاف.",a:true},
+      {t:"tf",q:"من شروط القاضي معرفة اللغة العربية.",a:true},
+      {t:"tf",q:"من شروط القاضي سلامة الحواس.",a:true},
+      {t:"tf",q:"يجب على القاضي التسوية بين الخصمين.",a:true},
+      {t:"tf",q:"يحرم على القاضي قبول الهدية ممن في محل ولايته.",a:true},
+      {t:"mcq",q:"القضاء عند الغضب الشديد:",o:["يجوز","يكره","يحرم","مستحب"],a:2},
+      {t:"mcq",q:"القضاء عند الغضب غير الشديد:",o:["يجوز","يكره","يحرم","مستحب"],a:1},
+      {t:"tf",q:"لا يجوز للقاضي أن يسأل المدعى عليه إلا بعد فراغ المدعي من دعواه.",a:true},
+      {t:"tf",q:"لا يحلف القاضي المدعى عليه إلا بعد طلب المدعي.",a:true},
+      {t:"fill",q:"حكم القضاء ............ كفاية.",a:"فرض"},
+      {t:"fill",q:"عدد شروط القاضي ............ شرطاً.",a:"أحدى عشرة"},
+      {t:"def",q:"عرّف القضاء شرعاً.",a:"فصل الخصومة بين خصمين فأكثر بحكم الله تعالى."},
+      {t:"why",q:"علل: يحرم على القاضي قبول الهدية.",a:"للتهمة، لأن الهدية في محل ولايته قد تؤثر في حكمه."},
+      {t:"sit",q:"ما الحكم: تولية مختل النظر للقضاء؟",a:"لا تصح توليته، لأن من شروط القاضي ألا يكون مختل النظر أو الفكر."},
+      {t:"sit",q:"ما الحكم: أهدا شخص هدية للقاضي؟",a:"تحرم عليه إن كان من أهل محل ولايته، وإن كان من غيرهم فلا تحرم."},
+      {t:"compare",q:"قارن بين القضاء عند الغضب الشديد وعند الغضب غير الشديد.",a:"الشديد: يحرم. غير الشديد: يكره. وفي الحالتين إذا قضى نفذ حكمه مع الكراهة."},
+      {t:"tf",q:"تولية فاسد للقضاء لا تصح.",a:true},
+      {t:"mcq",q:"يجب على القاضي:",o:["الإكرام للخصمين","القيام لهما","رد السلام","كل ما سبق"],a:3}
+    ]
+  },
+  {
+    id:20, title:"الدعوى والشهادات", icon:"📜",
+    summary:"الدعوى شرعاً: إخبار بحق له على غيره عند حاكم. البيّنة هم الشهود. المدعي: من يخالف قوله الظاهر. المدعى عليه: من يوافق قوله الظاهر. البينة على المدعي واليمين على المدعى عليه. الشهادة شرعاً: إخبار بحق لغيره على غيره بلفظ مخصوص. شروط الشاهد: الإسلام، البلوغ، العقل، العدالة. شروط العدالة خمسة.",
+    points:[
+      "الدعوى: إخبار بحق على غيره عند حاكم",
+      "المدعي: من يخالف قوله الظاهر",
+      "البينة على المدعي واليمين على المنكر",
+      "الشهادة: إخبار بحق لغيره على غيره",
+      "شروط الشاهد: الإسلام، البلوغ، العقل، العدالة",
+      "شروط العدالة خمسة"
+    ],
+    questions:[
+      {t:"mcq",q:"الدعوى لغةً:",o:["الطلب والتمني","الإخبار","الحكم","القضاء"],a:0},
+      {t:"mcq",q:"الدعوى شرعاً:",o:["إخبار بحق له على غيره عند حاكم","الطلب","القضاء","الحكم"],a:0},
+      {t:"mcq",q:"البينة هي:",o:["الشهود","القاضي","الحاكم","الإقرار"],a:0},
+      {t:"mcq",q:"المدعي هو:",o:["من يوافق قوله الظاهر","من يخالف قوله الظاهر","القاضي","الشاهد"],a:1},
+      {t:"mcq",q:"المدعى عليه هو:",o:["من يوافق قوله الظاهر","من يخالف قوله الظاهر","القاضي","الشاهد"],a:0},
+      {t:"mcq",q:"البينة على:",o:["المدعى عليه","المدعي","القاضي","الشاهد"],a:1},
+      {t:"mcq",q:"اليمين على:",o:["المدعي","المدعى عليه","القاضي","الشاهد"],a:1},
+      {t:"mcq",q:"إذا امتنع المدعى عليه عن اليمين (النكول):",o:["يحبس","ترد اليمين على المدعي","يغرم","لا شيء"],a:1},
+      {t:"mcq",q:"الشهادة لغةً:",o:["الحضور والمعاينة","الإخبار","الحكم","القضاء"],a:0},
+      {t:"mcq",q:"الشهادة شرعاً:",o:["إخبار بحق لغيره على غيره بلفظ مخصوص","الحضور","المعاينة","الإقرار"],a:0},
+      {t:"mcq",q:"عدد شروط الشاهد:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"من شروط الشاهد الإسلام.",a:true},
+      {t:"tf",q:"من شروط الشاهد البلوغ.",a:true},
+      {t:"tf",q:"من شروط الشاهد العقل.",a:true},
+      {t:"tf",q:"من شروط الشاهد العدالة.",a:true},
+      {t:"mcq",q:"العدالة لغةً:",o:["التوسط","الإسلام","الصلاح","الاستقامة"],a:0},
+      {t:"mcq",q:"العدالة شرعاً:",o:["ملكة في النفس تمنعها من اقتراف الكبائر والرذائل المباحة","الصلاح","الإسلام","الاستقامة"],a:0},
+      {t:"mcq",q:"عدد شروط العدالة:",o:["ثلاثة","أربعة","خمسة","ستة"],a:2},
+      {t:"tf",q:"من شروط العدالة اجتناب الكبائر.",a:true},
+      {t:"tf",q:"من شروط العدالة عدم الإصرار على الصغائر.",a:true},
+      {t:"tf",q:"من شروط العدالة سلامة العقيدة.",a:true},
+      {t:"tf",q:"من شروط العدالة الأمانة عند الغضب.",a:true},
+      {t:"tf",q:"من شروط العدالة المروءة.",a:true},
+      {t:"tf",q:"لا تقبل شهادة العدو على عدوه.",a:true},
+      {t:"tf",q:"تقبل شهادة العدو لعدوه.",a:true},
+      {t:"tf",q:"لا تقبل شهادة الأصل لفرعه.",a:true},
+      {t:"tf",q:"تقبل شهادة الأصل على فرعه.",a:true},
+      {t:"tf",q:"لا تقبل شهادة الوالد لولده.",a:true},
+      {t:"mcq",q:"من حلف على فعل نفسه إثباتاً أو نفيًا حلف على:",o:["القطع","نفي العلم","النفي المقيد","الظن"],a:0},
+      {t:"mcq",q:"من حلف على فعل غيره نفيًا مطلقاً حلف على:",o:["القطع","نفي العلم","النفي المقيد","الظن"],a:1},
+      {t:"fill",q:"البينة على ............ واليمين على ............",a:"المدعي المدعى عليه"},
+      {t:"fill",q:"عدد شروط الشاهد ............ شروط.",a:"أربعة"},
+      {t:"def",q:"عرّف الدعوى شرعاً.",a:"إخبار بحق له على غيره عند حاكم يصح حكمه أو محكم."},
+      {t:"def",q:"عرّف الشهادة شرعاً.",a:"إخبار بحق لغيره على غيره بلفظ مخصوص."},
+      {t:"def",q:"عرّف العدالة شرعاً.",a:"ملكة في النفس تمنعها من اقتراف الكبائر والرذائل المباحة."},
+      {t:"why",q:"علل: لا تقبل شهادة العدو على عدوه.",a:"للتهمة، بخلاف شهادته له فإنها تقبل لانتفاء التهمة."},
+      {t:"sit",q:"ما الحكم: ادعى شخصان شيئاً واحداً في يد أحدهما؟",a:"القول لمن معه بينة، فإن لم يكن لأحدهما بينة فالقول قول من معه الشيء بيمينه."},
+      {t:"compare",q:"قارن بين المدعي والمدعى عليه.",a:"المدعي: من يخالف قوله الظاهر، والبينة عليه. المدعى عليه: من يوافق قوله الظاهر، واليمين عليه."},
+      {t:"mcq",q:"التزكية تكون بـ:",o:["قول المدعى عليه","إحضار من يشهد بعدالة الشاهد","علم القاضي","قول القاضي"],a:1}
+    ]
+  },
+  {
+    id:21, title:"المواريث والفروض", icon:"⚖️",
+    summary:"علم الميراث: علم يبين كيفية الترف في تركة الميت. أركان الإرث ثلاثة: وارث، مورث، حق موروث. أسبابه: القرابة، النكاح، الولاء. موانعه: القتل، اختلاف الدين، الرق. شروطه: موت المورث، حياة الوارث، معرفة الصلة. الفروض المقدرة ستة: النصف، الربع، الثمن، الثلثان، الثلث، السدس.",
+    points:[
+      "علم الميراث: كيفية الترف في تركة الميت",
+      "أركانه: وارث، مورث، حق موروث",
+      "أسبابه: قرابة، نكاح، ولاء",
+      "موانعه: قتل، اختلاف دين، رق",
+      "الفروض المقدرة ستة",
+      "أصحاب النصف: 5 (بنت، بنت ابن، أخت شقيقة، أخت لأب، زوج)",
+      "أصحاب الربع: 2 (الزوج مع الفرع، الزوجة بدونه)",
+      "أصحاب الثمن: الزوجة مع الفرع",
+      "أصحاب الثلثين: 4",
+      "أصحاب الثلث: 2 (الأم، الإخوة لأم)",
+      "أصحاب السدس: 7"
+    ],
+    questions:[
+      {t:"mcq",q:"علم الميراث:",o:["علم يبين كيفية الترف في تركة الميت","علم الفرائض","علم الفقه","علم القضاء"],a:0},
+      {t:"mcq",q:"الفرائض لغةً:",o:["جمع فريضة من الفرض بمعنى التقدير","الفرض","الواجب","القسمة"],a:0},
+      {t:"mcq",q:"الفرض شرعاً:",o:["جزء مقدر شرعاً يُعطى لوارث خاص","النصيب","القسمة","الواجب"],a:0},
+      {t:"mcq",q:"حكم تعلم علم الميراث:",o:["فرض عين","فرض كفاية","سنة","مستحب"],a:1},
+      {t:"mcq",q:"حكم تطبيق أحكام الميراث:",o:["فرض كفاية","فرض","سنة","مستحب"],a:1},
+      {t:"mcq",q:"عدد أركان الإرث:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من أركان الإرث:",o:["الوارث","المورث","الحق الموروث","كل ما سبق"],a:3},
+      {t:"mcq",q:"عدد أسباب الإرث:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من أسباب الإرث:",o:["القرابة","النكاح","الولاء","كل ما سبق"],a:3},
+      {t:"mcq",q:"عدد موانع الإرث:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من موانع الإرث:",o:["القتل","اختلاف الدين","الرق","كل ما سبق"],a:3},
+      {t:"mcq",q:"عدد شروط الإرث:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"tf",q:"من شروط الإرث تحقق موت المورث.",a:true},
+      {t:"tf",q:"من شروط الإرث تحقق حياة الوارث عند موت المورث.",a:true},
+      {t:"mcq",q:"عدد الفروض المقدرة:",o:["أربعة","خمسة","ستة","سبعة"],a:2},
+      {t:"mcq",q:"من الفروض المقدرة:",o:["النصف والربع","الثمن والثلثين","الثلث والسدس","كل ما سبق"],a:3},
+      {t:"mcq",q:"عدد أصحاب النصف:",o:["ثلاثة","أربعة","خمسة","ستة"],a:2},
+      {t:"mcq",q:"من أصحاب النصف:",o:["البنت","بنت الابن","الأخت الشقيقة","كل ما سبق"],a:3},
+      {t:"mcq",q:"من أصحاب النصف:",o:["الأخت لأب","الزوج","الزوجة","الأم"],a:1},
+      {t:"mcq",q:"البنت تستحق النصف بشرط:",o:["الانفراد","عدم وجود معصب","كلاهما","لا شيء"],a:2},
+      {t:"mcq",q:"الزوج يستحق النصف بشرط:",o:["وجود الفرع الوارث","عدم وجود الفرع الوارث","الانفراد","لا شيء"],a:1},
+      {t:"mcq",q:"عدد أصحاب الربع:",o:["واحد","اثنان","ثلاثة","أربعة"],a:1},
+      {t:"mcq",q:"من أصحاب الربع:",o:["الزوج والزوجة","الزوج فقط","الزوجة فقط","الأب"],a:0},
+      {t:"mcq",q:"الزوج يستحق الربع عند:",o:["وجود الفرع الوارث","عدم وجود الفرع الوارث","الانفراد","لا شيء"],a:0},
+      {t:"mcq",q:"الزوجة تستحق الربع عند:",o:["وجود الفرع الوارث","عدم وجود الفرع الوارث","الانفراد","لا شيء"],a:1},
+      {t:"mcq",q:"عدد أصحاب الثمن:",o:["واحد","اثنان","ثلاثة","أربعة"],a:0},
+      {t:"mcq",q:"من أصحاب الثمن:",o:["الزوج","الزوجة","الأم","الأب"],a:1},
+      {t:"mcq",q:"الزوجة تستحق الثمن عند:",o:["وجود الفرع الوارث","عدم وجود الفرع الوارث","الانفراد","لا شيء"],a:0},
+      {t:"mcq",q:"عدد أصحاب الثلثين:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:2},
+      {t:"mcq",q:"من أصحاب الثلثين:",o:["البنتان الصلبيتان","بنتا الابن","الأختان الشقيقتان","كل ما سبق"],a:3},
+      {t:"mcq",q:"عدد أصحاب الثلث:",o:["واحد","اثنان","ثلاثة","أربعة"],a:1},
+      {t:"mcq",q:"من أصحاب الثلث:",o:["الأم","الإخوة لأم","الأب","الجد"],a:0},
+      {t:"mcq",q:"الأم تستحق الثلث بشرط:",o:["عدم وجود الفرع الوارث","عدم وجود اثنين فأكثر من الإخوة","كلاهما","لا شيء"],a:2},
+      {t:"mcq",q:"الإخوة لأم يستحقون الثلث بشرط:",o:["عدم وجود الفرع الوارث","عدم وجود الأصل الوارث المذكر","كلاهما","لا شيء"],a:2},
+      {t:"mcq",q:"عدد أصحاب السدس:",o:["خمسة","ستة","سبعة","ثمانية"],a:2},
+      {t:"mcq",q:"من أصحاب السدس:",o:["الأب","الأم","الجد الصحيح","كل ما سبق"],a:3},
+      {t:"mcq",q:"الأب يستحق السدس عند:",o:["وجود الفرع الوارث","عدم وجود الفرع الوارث","الانفراد","لا شيء"],a:0},
+      {t:"mcq",q:"الأم تستحق السدس عند:",o:["وجود الفرع الوارث أو عدد من الإخوة","عدم وجود الفرع","الانفراد","لا شيء"],a:0},
+      {t:"fill",q:"عدد أركان الإرث ............ أركان.",a:"ثلاثة"},
+      {t:"fill",q:"عدد أسباب الإرث ............ أسباب.",a:"ثلاثة"},
+      {t:"fill",q:"عدد موانع الإرث ............ موانع.",a:"ثلاثة"},
+      {t:"fill",q:"عدد الفروض المقدرة ............ فروض.",a:"ستة"},
+      {t:"fill",q:"عدد أصحاب النصف ............ أصحاب.",a:"خمسة"},
+      {t:"def",q:"عرّف علم الميراث.",a:"علم يبين كيفية الترف في تركة الميت."},
+      {t:"def",q:"عرّف الفرض شرعاً.",a:"جزء مقدر شرعاً يُعطى لوارث خاص."},
+      {t:"why",q:"علل: تعلم علم الميراث فرض كفاية.",a:"لأنه لا بد للناس من قسمة التركات، فإذا قام به بعضهم سقط عن الباقين."},
+      {t:"sit",q:"ما الحكم: قتل الوارث مورثه؟",a:"لا يرث، لأن القتل مانع من موانع الإرث."},
+      {t:"compare",q:"قارن بين فرض الزوج وفرض الزوجة.",a:"الزوج: النصف (بلا فرع) أو الربع (مع الفرع). الزوجة: الربع (بلا فرع) أو الثمن (مع الفرع)."},
+      {t:"compare",q:"قارن بين فرض الأم في حالاتها الثلاث.",a:"السدس: مع الفرع الوارث أو عدد من الإخوة. الثلث: بلا فرع ولا عدد من الإخوة. الثلث في أحد الزوجين (مسألة العمريتين)."},
+      {t:"mcq",q:"من لا يسقط من الورثة بحال:",o:["الأب والابن","الزوج والزوجة","الأم والبنت","كل ما سبق"],a:3},
+      {t:"tf",q:"القاتل لا يرث من مقتوله.",a:true},
+      {t:"tf",q:"الكافر لا يرث من المسلم.",a:true},
+      {t:"tf",q:"المرتد لا يرث.",a:true},
+      {t:"tf",q:"الزوجان يتوارثان مع اختلاف الدين.",a:false}
+    ]
+  },
+  {
+    id:22, title:"العصبات والحجب", icon:"👥",
+    summary:"العصبة: كل شخص ليس له سهم مقدر. أقسامها ثلاثة: عصبة بالنفس (الابن، الأب، الأخ، العم)، عصبة بالغير (البنت مع الابن، الأخت مع الأخ)، عصبة مع الغير (الأخت مع البنت). الحجب قسمان: حرمان (بالوصف كالقتل، وبالشخص كالجد بالأب) ونقصان (كحجب الزوج من النصف إلى الربع).",
+    points:[
+      "العصبة: من ليس له سهم مقدر",
+      "عصبة بالنفس: الابن، الأب، الأخ، العم",
+      "عصبة بالغير: البنت مع الابن، الأخت مع الأخ",
+      "عصبة مع الغير: الأخت مع البنت",
+      "الحجب: حرمان ونقصان",
+      "حجب الحرمان: بالوصف (القتل) وبالشخص (الجد بالأب)",
+      "حجب النقصان: كالزوج من النصف للربع"
+    ],
+    questions:[
+      {t:"mcq",q:"العصبة هي:",o:["من له سهم مقدر","كل شخص ليس له سهم مقدر","الوارث فقط","الفرد"],a:1},
+      {t:"mcq",q:"عدد أقسام العصبة:",o:["اثنان","ثلاثة","أربعة","خمسة"],a:1},
+      {t:"mcq",q:"من أقسام العصبة:",o:["عصبة بالنفس","عصبة بالغير","عصبة مع الغير","كل ما سبق"],a:3},
+      {t:"mcq",q:"عصبة بالنفس:",o:["الابن","الأب","الأخ الشقيق","كل ما سبق"],a:3},
+      {t:"mcq",q:"عصبة بالغير:",o:["البنت مع الابن","بنت الابن مع ابن الابن","الأخت الشقيقة مع أخيها","كل ما سبق"],a:3},
+      {t:"mcq",q:"عصبة مع الغير:",o:["الأخت الشقيقة مع البنت","الأخت لأب مع البنت","كلاهما","لا شيء"],a:2},
+      {t:"mcq",q:"الحجب لغةً:",o:["المنع","الستر","الحجاب","الغطاء"],a:0},
+      {t:"mcq",q:"الحجب شرعاً:",o:["منع من قام به سبب الإرث من إرثه أو من أوفر حظيه","المنع","الستر","الغطاء"],a:0},
+      {t:"mcq",q:"أقسام الحجب:",o:["حرمان فقط","نقصان فقط","حرمان ونقصان","ثلاثة"],a:2},
+      {t:"mcq",q:"حجب الحرمان يكون:",o:["بالوصف فقط","بالشخص فقط","بالوصف والشخص","لا شيء"],a:2},
+      {t:"tf",q:"من حجب الحرمان بالوصف: القتل.",a:true},
+      {t:"tf",q:"الجدات يحجبن بالأم.",a:true},
+      {t:"tf",q:"الأجداد يحجبون بالأب.",a:true},
+      {t:"tf",q:"الأخ لأم يحجب بالفرع الوارث.",a:true},
+      {t:"tf",q:"الأخ لأم يحجب بالأصل الوارث المذكر.",a:true},
+      {t:"tf",q:"الأخ الشقيق يحجب بالأب.",a:true},
+      {t:"tf",q:"الأخ الشقيق يحجب بالابن.",a:true},
+      {t:"tf",q:"الأخ لأب يحجب بالأخ الشقيق.",a:true},
+      {t:"mcq",q:"حجب الزوج من النصف إلى الربع:",o:["حرمان","نقصان","كلاهما","لا شيء"],a:1},
+      {t:"mcq",q:"حجب الزوجة من الربع إلى الثمن:",o:["حرمان","نقصان","كلاهما","لا شيء"],a:1},
+      {t:"mcq",q:"حجب الأم من الثلث إلى السدس:",o:["حرمان","نقصان","كلاهما","لا شيء"],a:1},
+      {t:"fill",q:"عدد أقسام العصبة ............ أقسام.",a:"ثلاثة"},
+      {t:"fill",q:"أقسام الحجب ............ و ............",a:"حرمان نقصان"},
+      {t:"def",q:"عرّف العصبة.",a:"كل شخص ليس له سهم مقدر على المجمع من إرثهم."},
+      {t:"def",q:"عرّف الحجب شرعاً.",a:"منع من قام به سبب الإرث من إرثه أو من أوفر حظيه."},
+      {t:"why",q:"علل: لا يدخل حجب الحرمان بالشخص على الزوجين والأبوين وولد الصلب.",a:"لأنهم لا يُحجبون حجب حرمان بالشخص، بل قد يُحجبون حجب حرمان بالوصف كالقتل واختلاف الدين والرق."},
+      {t:"sit",q:"ما الحكم: مات عن ابن قاتل وأخت شقيقة؟",a:"الابن القاتل محروم، والأخت الشقيقة ترث الباقي تعصيباً مع البنت إن وجدت، أو تأخذ الباقي."},
+      {t:"compare",q:"قارن بين حجب الحرمان وحجب النقصان.",a:"الحرمان: منع من الإرث كله. النقصان: منع من أوفر الحظين كالزوج من النصف إلى الربع."},
+      {t:"compare",q:"قارن بين العصبة بالغير والعصبة مع الغير.",a:"العصبة بالغير: أنثى صاحبة فرض النصف معها ذكر يعصبها (بنت مع ابن). العصبة مع الغير: أخت شقيقة أو لأب مع البنت أو بنت الابن."},
+      {t:"mcq",q:"أربعة من الذكور لا يعصبون أخواتهم:",o:["الأعمام","بنو الأعمام","بنو الإخوة الأشقاء","بنو الإخوة لأب","كل ما سبق"],a:4},
+      {t:"tf",q:"الأخ لأم لا يعصب أخته.",a:true},
+      {t:"tf",q:"يجري الترجيح بين العصبات بالنفس بالجهة ثم الدرجة ثم قوة القرابة.",a:true}
+    ]
+  }
+];
+
+/* ============================================================
+   المتغيرات العامة
+   ============================================================ */
+let currentStudent = "";
+let currentLesson = null;
+let currentExam = [];
+let currentAnswers = [];
+let currentQuestionIndex = 0;
+let examTimer = null;
+let examStartTime = 0;
+let examLevel = "";
+
+/* ============================================================
+   الإعداد الأولي
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function(){
+  // استرجاع اسم الطالب
+  const savedName = localStorage.getItem('studentName');
+  if(savedName){
+    document.getElementById('studentName').value = savedName;
+    document.getElementById('enterBtn').disabled = false;
+  }
+  
+  // استرجاع الوضع الليلي
+  const theme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelector('.theme-toggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+  
+  // تفعيل حقل الاسم
+  document.getElementById('studentName').addEventListener('input', function(){
+    document.getElementById('enterBtn').disabled = this.value.trim().length < 2;
+  });
+  
+  // إدخال بالضغط على Enter
+  document.getElementById('studentName').addEventListener('keypress', function(e){
+    if(e.key === 'Enter' && this.value.trim().length >= 2) enterApp();
+  });
+  
+  // تحميل الإنجازات
+  loadAchievements();
+});
+
+/* ============================================================
+   تبديل الوضع الليلي
+   ============================================================ */
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme');
+  const newTheme = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', newTheme);
+}
+
+/* ============================================================
+   الدخول للبرنامج
+   ============================================================ */
+function enterApp(){
+  const name = document.getElementById('studentName').value.trim();
+  if(name.length < 2){
+    showToast("الرجاء كتابة الاسم أولاً");
+    return;
+  }
+  
+  currentStudent = name;
+  localStorage.setItem('studentName', name);
+  
+  document.getElementById('welcomeScreen').style.display = 'none';
+  document.getElementById('mainApp').classList.add('active');
+  document.getElementById('welcomeName').textContent = `أهلاً بك، ${name}`;
+  
+  renderLessons();
+  loadAchievements();
+}
+
+/* ============================================================
+   عرض الدروس
+   ============================================================ */
+function renderLessons(){
+  const grid = document.getElementById('lessonsGrid');
+  grid.innerHTML = '';
+  
+  LESSONS.forEach((lesson, idx) => {
+    const card = document.createElement('div');
+    card.className = 'lesson-card';
+    card.style.animationDelay = (idx * 0.05) + 's';
+    card.innerHTML = `
+      <div class="lesson-icon">${lesson.icon}</div>
+      <h3>${lesson.title}</h3>
+      <p>درس من دروس الفقه الشافعي للصف الثالث الإعدادي</p>
+      <div class="lesson-meta">
+        <span class="lesson-questions">📝 ${lesson.questions.length} سؤال</span>
+        <span class="lesson-arrow">←</span>
+      </div>
+    `;
+    card.onclick = () => openLesson(lesson.id);
+    grid.appendChild(card);
+  });
+}
+
+/* ============================================================
+   فتح الدرس
+   ============================================================ */
+function openLesson(id){
+  currentLesson = LESSONS.find(l => l.id === id);
+  if(!currentLesson) return;
+  
+  document.getElementById('mainApp').classList.remove('active');
+  document.getElementById('lessonPage').classList.add('active');
+  
+  document.getElementById('lessonHeader').innerHTML = `
+    <h2>${currentLesson.icon} ${currentLesson.title}</h2>
+    <p>عدد الأسئلة المتاحة: ${currentLesson.questions.length} سؤال</p>
+  `;
+  
+  document.getElementById('lessonSummary').innerHTML = `<p>${currentLesson.summary}</p>`;
+  
+  const pointsHtml = currentLesson.points.map(p => `<li>${p}</li>`).join('');
+  document.getElementById('lessonPoints').innerHTML = `<ul>${pointsHtml}</ul>`;
+  
+  window.scrollTo(0, 0);
+}
+
+/* ============================================================
+   العودة للواجهة الرئيسية
+   ============================================================ */
+function showMainApp(){
+  document.getElementById('lessonPage').classList.remove('active');
+  document.getElementById('resultsPage').classList.remove('active');
+  document.getElementById('mainApp').classList.add('active');
+  loadAchievements();
+}
+
+/* ============================================================
+   المراجعة السريعة
+   ============================================================ */
+function openReview(){
+  if(!currentLesson) return;
+  const content = document.getElementById('reviewContent');
+  let html = '';
+  
+  // اختيار 15 سؤال عشوائي
+  const shuffled = [...currentLesson.questions].sort(() => Math.random() - 0.5).slice(0, 15);
+  
+  shuffled.forEach((q, i) => {
+    let questionText = q.q;
+    let answerText = '';
+    
+    if(q.t === 'mcq'){
+      answerText = q.o[q.a];
+    } else if(q.t === 'tf'){
+      answerText = q.a ? 'صح' : 'خطأ';
+    } else {
+      answerText = q.a;
+    }
+    
+    html += `
+      <div class="review-item">
+        <div class="q">${i+1}. ${questionText}</div>
+        <div class="a">✓ ${answerText}</div>
+      </div>
+    `;
+  });
+  
+  content.innerHTML = html;
+  document.getElementById('reviewModal').classList.add('active');
+}
+
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('active');
+}
+
+/* ============================================================
+   بدء الامتحان
+   ============================================================ */
+function startExam(level){
+  if(!currentLesson) return;
+  
+  examLevel = level;
+  let count;
+  switch(level){
+    case 'easy': count = 15; break;
+    case 'medium': count = 40; break;
+    case 'hard': count = 100; break;
+  }
+  
+  // اختيار الأسئلة عشوائياً
+  const allQuestions = [...currentLesson.questions];
+  // تكرار الأسئلة إذا كان العدد المطلوب أكبر من المتاح
+  while(allQuestions.length < count){
+    allQuestions.push(...currentLesson.questions);
+  }
+  
+  // خلط الأسئلة واختيار العدد المطلوب
+  currentExam = shuffleArray(allQuestions).slice(0, count).map(q => {
+    const newQ = {...q};
+    // خلط الاختيارات لأسئلة الاختيار من متعدد
+    if(newQ.t === 'mcq'){
+      const correctAnswer = newQ.o[newQ.a];
+      newQ.o = shuffleArray([...newQ.o]);
+      newQ.a = newQ.o.indexOf(correctAnswer);
+    }
+    return newQ;
+  });
+  
+  currentAnswers = new Array(currentExam.length).fill(null);
+  currentQuestionIndex = 0;
+  examStartTime = Date.now();
+  
+  // عرض صفحة الامتحان
+  document.getElementById('lessonPage').classList.remove('active');
+  document.getElementById('examPage').classList.add('active');
+  
+  // معلومات الامتحان
+  const levelNames = {easy:'سهل', medium:'متوسط', hard:'مكثف'};
+  document.getElementById('examLessonName').textContent = currentLesson.title;
+  document.getElementById('examLevel').textContent = `امتحان ${levelNames[level]}`;
+  
+  // بدء المؤقت
+  if(examTimer) clearInterval(examTimer);
+  examTimer = setInterval(updateTimer, 1000);
+  
+  renderQuestion();
+  window.scrollTo(0, 0);
+}
+
+/* ============================================================
+   خلط المصفوفة
+   ============================================================ */
+function shuffleArray(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ============================================================
+   عرض السؤال
+   ============================================================ */
+function renderQuestion(){
+  const q = currentExam[currentQuestionIndex];
+  const container = document.getElementById('questionContainer');
+  
+  // تحديث العدادات
+  document.getElementById('qCounter').textContent = `السؤال ${currentQuestionIndex + 1} من ${currentExam.length}`;
+  document.getElementById('progressFill').style.width = ((currentQuestionIndex + 1) / currentExam.length * 100) + '%';
+  
+  // تعطيل/تفعيل أزرار التنقل
+  document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+  document.getElementById('nextBtn').disabled = currentQuestionIndex === currentExam.length - 1;
+  
+  const typeNames = {
+    mcq:'اختيار من متعدد',
+    tf:'صح أو خطأ',
+    fill:'أكمل الفراغ',
+    def:'تعريف',
+    why:'علل',
+    sit:'ما الحكم',
+    compare:'قارن'
+  };
+  
+  let html = `
+    <div class="question-card">
+      <div class="q-header">
+        <span class="q-number">سؤال ${currentQuestionIndex + 1}</span>
+        <span class="q-type">${typeNames[q.t] || 'سؤال'}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+  `;
+  
+  if(q.t === 'mcq'){
+    html += '<div class="options-list">';
+    const letters = ['أ','ب','ج','د','هـ'];
+    q.o.forEach((opt, i) => {
+      const selected = currentAnswers[currentQuestionIndex] === i ? 'selected' : '';
+      html += `
+        <div class="option-item ${selected}" onclick="selectAnswer(${i})">
+          <div class="option-letter">${letters[i]}</div>
+          <div>${opt}</div>
+        </div>
+      `;
+    });
+    html += '</div>';
+  } else if(q.t === 'tf'){
+    const selectedTrue = currentAnswers[currentQuestionIndex] === true ? 'selected' : '';
+    const selectedFalse = currentAnswers[currentQuestionIndex] === false ? 'selected' : '';
+    html += `
+      <div class="tf-options">
+        <div class="tf-btn true-btn ${selectedTrue}" onclick="selectAnswer(true)">✓ صح</div>
+        <div class="tf-btn false-btn ${selectedFalse}" onclick="selectAnswer(false)">✗ خطأ</div>
+      </div>
+    `;
+  } else {
+    // أسئلة الإكمال والتعريف والعلل والمواقف والمقارنة
+    const currentVal = currentAnswers[currentQuestionIndex] || '';
+    html += `<input type="text" class="input-answer" id="textAnswer" 
+              placeholder="اكتب إجابتك هنا..." 
+              value="${currentVal}"
+              oninput="currentAnswers[${currentQuestionIndex}] = this.value">`;
+  }
+  
+  html += '</div>';
+  container.innerHTML = html;
+  
+  // التركيز على حقل الإدخال
+  if(q.t !== 'mcq' && q.t !== 'tf'){
+    setTimeout(() => {
+      const input = document.getElementById('textAnswer');
+      if(input) input.focus();
+    }, 100);
+  }
+}
+
+/* ============================================================
+   اختيار الإجابة
+   ============================================================ */
+function selectAnswer(answer){
+  currentAnswers[currentQuestionIndex] = answer;
+  renderQuestion();
+}
+
+/* ============================================================
+   التنقل بين الأسئلة
+   ============================================================ */
+function nextQuestion(){
+  if(currentQuestionIndex < currentExam.length - 1){
+    currentQuestionIndex++;
+    renderQuestion();
+  }
+}
+
+function prevQuestion(){
+  if(currentQuestionIndex > 0){
+    currentQuestionIndex--;
+    renderQuestion();
+  }
+}
+
+/* ============================================================
+   المؤقت
+   ============================================================ */
+function updateTimer(){
+  const elapsed = Math.floor((Date.now() - examStartTime) / 1000);
+  const mins = Math.floor(elapsed / 60).toString().padStart(2, '0');
+  const secs = (elapsed % 60).toString().padStart(2, '0');
+  document.getElementById('examTimer').textContent = `⏱ ${mins}:${secs}`;
+}
+
+/* ============================================================
+   إنهاء الامتحان
+   ============================================================ */
+function finishExam(){
+  const unanswered = currentAnswers.filter(a => a === null || a === '').length;
+  
+  if(unanswered > 0){
+    if(!confirm(`لديك ${unanswered} سؤال بدون إجابة. هل تريد إنهاء الامتحان؟`)) return;
+  } else {
+    if(!confirm('هل تريد إنهاء الامتحان؟')) return;
+  }
+  
+  if(examTimer) clearInterval(examTimer);
+  
+  // حساب النتيجة
+  let correct = 0;
+  let wrong = 0;
+  const wrongQuestions = [];
+  
+  currentExam.forEach((q, i) => {
+    const userAnswer = currentAnswers[i];
+    let isCorrect = false;
+    
+    if(q.t === 'mcq'){
+      isCorrect = userAnswer === q.a;
+    } else if(q.t === 'tf'){
+      isCorrect = userAnswer === q.a;
+    } else {
+      // للأسئلة النصية - مطابقة تقريبية
+      if(userAnswer && typeof userAnswer === 'string'){
+        const normalized = userAnswer.trim().toLowerCase();
+        const correct = q.a.trim().toLowerCase();
+        // مطابقة بسيطة - إذا كانت الإجابة تحتوي على الكلمات الرئيسية
+        if(normalized === correct || normalized.includes(correct) || correct.includes(normalized)){
+          isCorrect = true;
+        }
+        // مطابقة الكلمات الرئيسية (60% من الكلمات)
+        const words = correct.split(' ').filter(w => w.length > 2);
+        const matchedWords = words.filter(w => normalized.includes(w)).length;
+        if(words.length > 0 && matchedWords / words.length >= 0.6){
+          isCorrect = true;
+        }
+      }
+    }
+    
+    if(isCorrect){
+      correct++;
+    } else {
+      wrong++;
+      wrongQuestions.push({q: q.q, correct: q.t === 'mcq' ? q.o[q.a] : (q.t === 'tf' ? (q.a ? 'صح' : 'خطأ') : q.a), user: userAnswer});
+    }
+  });
+  
+  const total = currentExam.length;
+  const percentage = Math.round((correct / total) * 100);
+  const elapsed = Math.floor((Date.now() - examStartTime) / 1000);
+  
+  showResults(correct, wrong, total, percentage, elapsed, wrongQuestions);
+}
+
+/* ============================================================
+   عرض النتائج
+   ============================================================ */
+function showResults(correct, wrong, total, percentage, elapsed, wrongQuestions){
+  document.getElementById('examPage').classList.remove('active');
+  document.getElementById('resultsPage').classList.add('active');
+  
+  // التقدير
+  let grade, emoji, color;
+  if(percentage >= 90){ grade = 'ممتاز'; emoji = '🏆'; color = 'var(--success)'; }
+  else if(percentage >= 80){ grade = 'جيد جداً'; emoji = '🌟'; color = 'var(--accent)'; }
+  else if(percentage >= 70){ grade = 'جيد'; emoji = '👍'; color = 'var(--gold)'; }
+  else if(percentage >= 60){ grade = 'مقبول'; emoji = '🙂'; color = 'var(--warning)'; }
+  else { grade = 'ضعيف'; emoji = '💪'; color = 'var(--danger)'; }
+  
+  // رسائل التحفيز
+  const messages = [
+    'أداء رائع! استمر في التقدم',
+    'أنت تقترب من التفوق',
+    'ممتاز جداً! واصل العطاء',
+    'يمكنك تحقيق نتيجة أفضل، لا تيأس',
+    'النجاح يحتاج إلى مزيد من المراجعة',
+    'أحسنت! أنت على الطريق الصحيح',
+    'كل اختبار يقربك من التميز',
+    'الإصرار مفتاح النجاح'
+  ];
+  const message = messages[Math.floor(Math.random() * messages.length)];
+  
+  // تحليل الأداء
+  const strengths = [];
+  const weaknesses = [];
+  
+  if(percentage >= 80) strengths.push('فهمك للمفاهيم الأساسية ممتاز');
+  if(percentage >= 70) strengths.push('قدرتك على استرجاع المعلومات جيدة');
+  if(wrong < total * 0.2) strengths.push('تركيزك وتدقيقك في الإجابات عالٍ');
+  
+  if(percentage < 70) weaknesses.push('يحتاج إلى مزيد من المراجعة الشاملة');
+  if(wrong > total * 0.3) weaknesses.push('راجع التفاصيل الدقيقة في الدرس');
+  if(wrong > 0 && wrongQuestions.length > 5) weaknesses.push('حاول حل أسئلة أكثر تنوعاً');
+  
+  if(strengths.length === 0) strengths.push('بداية جيدة، استمر في المحاولة');
+  if(weaknesses.length === 0) weaknesses.push('أداؤك متوازن، حافظ على مستواك');
+  
+  // الوقت
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  const timeStr = `${mins} دقيقة و ${secs} ثانية`;
+  
+  const html = `
+    <div class="result-emoji">${emoji}</div>
+    <div class="result-grade" style="color:${color};">${grade}</div>
+    <div class="result-message">${message}</div>
+    <div class="result-score">${correct} / ${total}</div>
+    <div class="result-percentage">النسبة المئوية: ${percentage}%</div>
+    
+    <div class="result-stats">
+      <div class="result-stat stat-correct">
+        <span class="stat-val">${correct}</span>
+        <span class="stat-lbl">إجابات صحيحة</span>
+      </div>
+      <div class="result-stat stat-wrong">
+        <span class="stat-val">${wrong}</span>
+        <span class="stat-lbl">إجابات خاطئة</span>
+      </div>
+      <div class="result-stat stat-total">
+        <span class="stat-val">${total}</span>
+        <span class="stat-lbl">إجمالي الأسئلة</span>
+      </div>
+      <div class="result-stat stat-time">
+        <span class="stat-val">${mins}:${secs.toString().padStart(2,'0')}</span>
+        <span class="stat-lbl">الوقت المستغرق</span>
+      </div>
+    </div>
+    
+    <div class="analysis-section">
+      <h4>💪 نقاط القوة</h4>
+      <ul class="strength-list">
+        ${strengths.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    </div>
+    
+    <div class="analysis-section">
+      <h4>📋 نقاط تحتاج إلى مراجعة</h4>
+      <ul class="weakness-list">
+        ${weaknesses.map(w => `<li>${w}</li>`).join('')}
+      </ul>
+    </div>
+    
+    ${wrongQuestions.length > 0 ? `
+    <div class="analysis-section">
+      <h4>📝 مراجعة الأسئلة الخاطئة</h4>
+      ${wrongQuestions.slice(0, 5).map((w, i) => `
+        <div class="review-item" style="margin-bottom:10px;border-right-color:var(--danger);">
+          <div class="q">${i+1}. ${w.q}</div>
+          <div class="a" style="color:var(--success);">✓ الإجابة الصحيحة: ${w.correct}</div>
+        </div>
+      `).join('')}
+      ${wrongQuestions.length > 5 ? `<p style="color:var(--text-muted);font-size:13px;text-align:center;">و ${wrongQuestions.length - 5} سؤال آخر...</p>` : ''}
+    </div>
+    ` : ''}
+    
+    <div class="results-actions">
+      <button class="nav-btn prev" onclick="retryExam()">🔄 إعادة الامتحان</button>
+      <button class="nav-btn next" onclick="goToLessons()">📚 الدروس</button>
+      <button class="nav-btn finish" onclick="goHome()">🏠 الرئيسية</button>
+    </div>
+  `;
+  
+  document.getElementById('resultsCard').innerHTML = html;
+  
+  // حفظ النتيجة
+  saveExamResult({
+    lesson: currentLesson.title,
+    level: examLevel,
+    correct, wrong, total, percentage,
+    date: new Date().toISOString(),
+    time: elapsed
+  });
+  
+  window.scrollTo(0, 0);
+}
+
+/* ============================================================
+   حفظ النتائج والإنجازات
+   ============================================================ */
+function saveExamResult(result){
+  let results = JSON.parse(localStorage.getItem('examResults') || '[]');
+  results.push(result);
+  localStorage.setItem('examResults', JSON.stringify(results));
+}
+
+function loadAchievements(){
+  const results = JSON.parse(localStorage.getItem('examResults') || '[]');
+  
+  const totalExams = results.length;
+  const bestScore = results.length > 0 ? Math.max(...results.map(r => r.percentage)) : 0;
+  const avgScore = results.length > 0 ? Math.round(results.reduce((s,r) => s + r.percentage, 0) / results.length) : 0;
+  const totalTime = results.reduce((s,r) => s + r.time, 0);
+  const totalHours = Math.floor(totalTime / 3600);
+  const uniqueLessons = new Set(results.map(r => r.lesson)).size;
+  
+  // تحديث الإحصائيات في الهيدر
+  document.getElementById('statExams').textContent = totalExams;
+  document.getElementById('statBest').textContent = bestScore + '%';
+  document.getElementById('statAvg').textContent = avgScore + '%';
+  
+  // عرض الإنجازات
+  const grid = document.getElementById('achievementsGrid');
+  grid.innerHTML = `
+    <div class="achievement-card">
+      <div class="ach-icon">📝</div>
+      <div class="ach-value">${totalExams}</div>
+      <div class="ach-label">امتحانات منجزة</div>
+    </div>
+    <div class="achievement-card">
+      <div class="ach-icon">🏆</div>
+      <div class="ach-value">${bestScore}%</div>
+      <div class="ach-label">أفضل درجة</div>
+    </div>
+    <div class="achievement-card">
+      <div class="ach-icon">📊</div>
+      <div class="ach-value">${avgScore}%</div>
+      <div class="ach-label">متوسط الدرجات</div>
+    </div>
+    <div class="achievement-card">
+      <div class="ach-icon">⏰</div>
+      <div class="ach-value">${totalHours}</div>
+      <div class="ach-label">ساعات الدراسة</div>
+    </div>
+    <div class="achievement-card">
+      <div class="ach-icon">📚</div>
+      <div class="ach-value">${uniqueLessons}</div>
+      <div class="ach-label">دروس مكتملة</div>
+    </div>
+    <div class="achievement-card">
+      <div class="ach-icon">🎯</div>
+      <div class="ach-value">${results.filter(r => r.percentage >= 90).length}</div>
+      <div class="ach-label">نتائج ممتازة</div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   إعادة الامتحان والتنقل
+   ============================================================ */
+function retryExam(){
+  document.getElementById('resultsPage').classList.remove('active');
+  startExam(examLevel);
+}
+
+function goToLessons(){
+  document.getElementById('resultsPage').classList.remove('active');
+  document.getElementById('lessonPage').classList.add('active');
+}
+
+function goHome(){
+  showMainApp();
+}
+
+/* ============================================================
+   التنبيهات
+   ============================================================ */
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+/* ============================================================
+   اختصارات لوحة المفاتيح
+   ============================================================ */
+document.addEventListener('keydown', function(e){
+  if(document.getElementById('examPage').classList.contains('active')){
+    if(e.key === 'ArrowLeft') nextQuestion();
+    if(e.key === 'ArrowRight') prevQuestion();
+    
+    // اختصارات صح وخطأ
+    const q = currentExam[currentQuestionIndex];
+    if(q && q.t === 'tf'){
+      if(e.key === '1' || e.key === 'ص') selectAnswer(true);
+      if(e.key === '2' || e.key === 'خ') selectAnswer(false);
+    }
+    
+    // اختصارات الاختيار من متعدد
+    if(q && q.t === 'mcq'){
+      const num = parseInt(e.key);
+      if(num >= 1 && num <= q.o.length){
+        selectAnswer(num - 1);
+      }
+    }
+  }
+  
+  if(e.key === 'Escape'){
+    if(document.getElementById('reviewModal').classList.contains('active')){
+      closeReview();
+    }
+  }
+});
+</script>
+
+</body>
+</html>
